@@ -5,7 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Welcome to what will become the React Native Pokedex Project!</Text>
+      <Text>Welcome to what will become the React Native Pokedex Project! This is exciting!</Text>
       <StatusBar style="auto" />
     </View>
   );
