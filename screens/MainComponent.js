@@ -15,7 +15,8 @@ const Drawer = createDrawerNavigator()
 
 const screenOptions = {
     headerTintColor: '#fff',
-    headerStyle: { backgroundColor: '#d3a6c8'}
+    headerStyle: { backgroundColor: '#d3a6c8'},
+    headerTitleAlign: 'center'
 }
 
 const HomeScreenNavigator = () => {
@@ -32,6 +33,7 @@ const HomeScreenNavigator = () => {
                             name='star'
                             type='font-awesome'
                             onPress={() => navigation.toggleDrawer()}
+                            containerStyle={{ marginLeft: 10 }}
                         />
                     ) 
                 })}
@@ -58,6 +60,7 @@ const MovesScreenNavigator = () => {
                             name='star'
                             type='font-awesome'
                             onPress={() => navigation.toggleDrawer()}
+                            containerStyle={{ marginLeft: 10 }}
                         />
                     ) 
                 })}
@@ -80,6 +83,7 @@ const AbilitiesScreenNavigator = () => {
                             name='star'
                             type='font-awesome'
                             onPress={() => navigation.toggleDrawer()}
+                            containerStyle={{ marginLeft: 10 }}
                         />
                     ) 
                 })}
@@ -102,6 +106,7 @@ const EvolutionsScreenNavigator = () => {
                             name='star'
                             type='font-awesome'
                             onPress={() => navigation.toggleDrawer()}
+                            containerStyle={{ marginLeft: 10 }}
                         />
                     ) 
                 })}
@@ -124,6 +129,7 @@ const GameVersionScreenNavigator = () => {
                             name='star'
                             type='font-awesome'
                             onPress={() => navigation.toggleDrawer()}
+                            containerStyle={{ marginLeft: 10 }}
                         />
                     ) 
                 })}
@@ -159,7 +165,7 @@ const Main = () => {
                 initialRouteName='Home'
                 drawerContent={CustomDrawerContent}
                 screenOptions={{
-                    drawerStyle: { backgroundColor: '#9c5c8c'},
+                    drawerStyle: { backgroundColor: '#fff'},
                     headerShown: true
                 }}
             >
