@@ -1,6 +1,7 @@
 import { View, Text } from 'react-native'
 
-const PokemonScreen = () => {
+const PokemonScreen = ({ route }) => {
+    const { pokemon } = route.params
     return(
         <View>
             <Text>
