@@ -57,12 +57,17 @@ const HomeScreen = ({ navigation }) => {
                                 {capitalize(pokemon.name)}
                             </Card.Title>
                             <Card.Divider />
-                            <Card.Image
-                                style={{ width: 80, height: 80 }}
+                            <View style={{ alignSelf: 'center' }}>
+                                <Card.Image
+                                style={{
+                                    width: 80, 
+                                    height: 80,
+                                }}
                                 source={{ uri: pokemon.sprites.front_default }}
                             />
+                            </View>
                             <Card.Divider />
-                            <Text>
+                            <Text style={{ textAlign: 'center' }}>
                                 {capitalize(pokemon.types[0].type.name)}
                             </Text>
                         </Card>
