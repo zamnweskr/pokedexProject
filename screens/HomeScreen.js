@@ -54,7 +54,7 @@ const HomeScreen = ({ navigation }) => {
                                 {pokemon.id}
                             </Text>
                             <Card.Title>
-                                {pokemon.name}
+                                {capitalize(pokemon.name)}
                             </Card.Title>
                             <Card.Divider />
                             <Card.Image
@@ -63,7 +63,7 @@ const HomeScreen = ({ navigation }) => {
                             />
                             <Card.Divider />
                             <Text>
-                                {pokemon.types[0].type.name}
+                                {capitalize(pokemon.types[0].type.name)}
                             </Text>
                         </Card>
                     </TouchableOpacity>
