@@ -1,4 +1,5 @@
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
+import { useState } from 'react'
 
 const PokemonScreen = ({ route }) => {
     const { pokemon } = route.params
@@ -10,5 +11,9 @@ const PokemonScreen = ({ route }) => {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+
+})
 
 export default PokemonScreen

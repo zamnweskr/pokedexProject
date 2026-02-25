@@ -1,33 +1,33 @@
-import { FlatList, Text, View, TouchableOpacity, Modal, Button, ActivityIndicator , StyleSheet} from 'react-native'
+import { FlatList, Text, View, TouchableOpacity, Modal, Button, ActivityIndicator, StyleSheet } from 'react-native'
 import { useState, useEffect } from 'react';
 import { getPokemonMoves, getPokemonMoveDetails } from '../API/calls';
 
 const MovesScreen = () => {
 
-      const [moves, setMoves] = useState([]);
-      const [loading, setLoading] = useState(true);
-        const [showModal, setShowModal] = useState(false);
-      const [selectedMove, setSelectedMove] = useState(null);
-        const [moveDetails, setMoveDetails] = useState(null);
+  const [moves, setMoves] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedMove, setSelectedMove] = useState(null);
+  const [moveDetails, setMoveDetails] = useState(null);
   const [loadingDetails, setLoadingDetails] = useState(false);
 
-        useEffect(() => {
+  useEffect(() => {
     const loadData = async () => {
-        try {
-      const result = await getPokemonMoves();  
-      setMoves(result);
-      setLoading(false);                 
-    } catch (error) {
-      setLoading(false);
-    }
+      try {
+        const result = await getPokemonMoves();
+        setMoves(result);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+      }
     };
 
     loadData();
   }, []);
-   
-    if (loading) {
+
+  if (loading) {
     return (
-           <View style={styles.centered}>
+      <View style={styles.centered}>
         <ActivityIndicator size="large" color="#0000ff" />
         <Text>Loading Pokemon Moves...</Text>
       </View>
@@ -35,13 +35,13 @@ const MovesScreen = () => {
     );
   }
 
-   const handleMovePress = async (move) => {
+  const handleMovePress = async (move) => {
     setSelectedMove(move);
     setShowModal(true);
     setLoadingDetails(true);
     setMoveDetails(null);
 
-        try {
+    try {
       const details = await getPokemonMoveDetails(move.url);
       console.log('Move details:', details); // See what data you get
       setMoveDetails(details);
@@ -53,10 +53,10 @@ const MovesScreen = () => {
   };
 
 
-     
-   const renderItem = ({ item }) => {
+
+  const renderItem = ({ item }) => {
     return (
-        <TouchableOpacity 
+      <TouchableOpacity
         style={styles.item}
         onPress={() => handleMovePress(item)}
       >
@@ -65,16 +65,16 @@ const MovesScreen = () => {
     );
   };
 
-    return (
-       <View style={{ flex: 1 }}>
-  <FlatList
-      data={moves}
-      renderItem={renderItem}
-      keyExtractor={(item, index) => index.toString()}
-      contentContainerStyle={styles.list}
-    />
+  return (
+    <View style={{ flex: 1 }}>
+      <FlatList
+        data={moves}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
+        contentContainerStyle={styles.list}
+      />
 
-       <Modal
+      <Modal
         animationType="slide"
         transparent={true}
         visible={showModal}
@@ -85,12 +85,12 @@ const MovesScreen = () => {
             <Text style={styles.modalTitle}>
               {selectedMove?.name}
             </Text>
-            
+
             {loadingDetails ? (
               <ActivityIndicator size="small" color="#0000ff" />
             ) : moveDetails ? (
               <>
-                   <Text style={styles.modalText}>
+                <Text style={styles.modalText}>
                   <Text style={styles.label}>Facts: </Text>
                   {moveDetails.flavor_text_entries?.flavor_text}
                 </Text>
@@ -120,10 +120,10 @@ const MovesScreen = () => {
                 </Text>
               </>
             ) : null}
-            
-            <Button 
-              title="Close" 
-              onPress={() => setShowModal(false)} 
+
+            <Button
+              title="Close"
+              onPress={() => setShowModal(false)}
             />
           </View>
         </View>
@@ -133,7 +133,7 @@ const MovesScreen = () => {
 };
 
 const styles = StyleSheet.create({
-   centered: {
+  centered: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center'
   },
-   label: {
+  label: {
     fontWeight: 'bold'
   }
 });
