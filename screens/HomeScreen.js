@@ -6,7 +6,7 @@ import { Card } from 'react-native-elements'
 
 const HomeScreen = ({ navigation }) => {
     const [pokemon, setPokemon] = useState([])
-    const [pageCount, setPageCount] = useState(8)
+    // const [pageCount, setPageCount] = useState(10)
 
     const fetchPokemon = async () => {
         const allPokemon = await getPokemon()
@@ -44,8 +44,8 @@ const HomeScreen = ({ navigation }) => {
                 numColumns={3}
                 renderItem={({ item: pokemon }) => (
                     <TouchableOpacity
-                        style={{ flex: 1, margin: 4}}
-                        onPress={() => 
+                        style={{ flex: 1, margin: 4 }}
+                        onPress={() =>
                             navigation.navigate('Pokemon', { pokemon: pokemon })
                         }
                     >
@@ -59,12 +59,12 @@ const HomeScreen = ({ navigation }) => {
                             <Card.Divider />
                             <View style={{ alignSelf: 'center' }}>
                                 <Card.Image
-                                style={{
-                                    width: 80, 
-                                    height: 80,
-                                }}
-                                source={{ uri: pokemon.sprites.front_default }}
-                            />
+                                    style={{
+                                        width: 80,
+                                        height: 80,
+                                    }}
+                                    source={{ uri: pokemon.sprites.front_default }}
+                                />
                             </View>
                             <Card.Divider />
                             <Text style={{ textAlign: 'center' }}>
