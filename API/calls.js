@@ -12,7 +12,7 @@ export const getPokemon = async () => {
 export const getPokemonByName = async (name) => {
     try{
         let response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
-    return response
+        return response
     } catch(e) {
         console.log(e)
         alert(`We can't find that pokemon! Check your spelling and check your network connection, then try again!`)
