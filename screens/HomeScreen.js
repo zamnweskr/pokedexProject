@@ -1,7 +1,7 @@
 import { Button, View, Text, TouchableOpacity, Image } from 'react-native'
 import { getPokemon, getPokemonByName } from '../API/calls'
 import { useState, useEffect } from 'react'
-import { FlatList } from 'react-native-gesture-handler'
+import { FlatList } from 'react-native'
 import { Card } from 'react-native-elements'
 
 const HomeScreen = ({ navigation }) => {
@@ -10,7 +10,6 @@ const HomeScreen = ({ navigation }) => {
 
     const fetchPokemon = async () => {
         const allPokemon = await getPokemon()
-        console.log(allPokemon.data)
         return allPokemon
     }
 
@@ -23,7 +22,6 @@ const HomeScreen = ({ navigation }) => {
             })
         )
         setPokemon(results)
-
     }
 
     useEffect(() => {

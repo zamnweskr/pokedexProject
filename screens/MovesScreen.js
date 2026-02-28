@@ -43,7 +43,7 @@ const MovesScreen = () => {
 
     try {
       const details = await getPokemonMoveDetails(move.url);
-      console.log('Move details:', details); // See what data you get
+      // console.log('Move details:', details); See what data you get
       setMoveDetails(details);
     } catch (error) {
       console.error('Error loading move details:', error);

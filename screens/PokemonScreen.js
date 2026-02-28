@@ -1,12 +1,13 @@
 import { View, Text } from 'react-native'
+import RenderPokemon from '../features/RenderPokemon'
 
 const PokemonScreen = ({ route }) => {
     const { pokemon } = route.params
     return(
         <View>
-            <Text>
-                This is the Pokemon Screen where you will see the detailed information about the pokemon
-            </Text>
+            <RenderPokemon
+                pokemon={pokemon}
+            />
         </View>
     )
 }
