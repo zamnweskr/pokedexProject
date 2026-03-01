@@ -28,11 +28,13 @@ const RenderPokemon = (props) => {
                     Weight: {pokemon.weight /10}kg
                 </Text>
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
-                <Text>
+            <View style={ styles.pokemonDescription }>
+                <Text style={{ textAlign: 'center'}}>
                     {description?.flavor_text_entries
                     ?.find(textEntry => textEntry.language.name === 'en')
                     ?.flavor_text
+                    ?.replace(/\f/g, ' ')
+                    ?.replace(/\n/g, ' ')
                     }
                 </Text>
             </View>
@@ -51,6 +53,10 @@ const styles = StyleSheet.create({
     pokemonImage: {
         width: 300,
         height: 300,
+    },
+    pokemonDescription: {
+        flexDirection: 'row', 
+        justifyContent: 'center', 
     }
 })
 
