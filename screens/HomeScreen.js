@@ -29,10 +29,6 @@ const HomeScreen = ({ navigation }) => {
         getEachPokemon()
     }, [])
 
-    // const capitalize = (name) => {
-    //     return name[0].toUpperCase() + name.slice(1)
-    // }
-
     return (
         <View style={{ flex: 1 }}>
             <FlatList

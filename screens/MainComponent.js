@@ -3,6 +3,7 @@ import Constants from 'expo-constants'
 import { createStackNavigator } from "@react-navigation/stack"
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer"
 import { Icon } from "react-native-elements"
+import { CardStyleInterpolators } from '@react-navigation/stack'
 import capitalize from '../utils/capitalize'
 import gengar from '../shared/img/gengar.png'
 import HomeScreen from "./HomeScreen"
@@ -16,7 +17,7 @@ const Drawer = createDrawerNavigator()
 
 const screenOptions = {
     headerTintColor: '#fff',
-    headerStyle: { backgroundColor: '#d3a6c8' },
+    headerStyle: { backgroundColor: '#d3a6c8', height: 80 },
     headerTitleAlign: 'center'
 }
 
@@ -44,15 +45,14 @@ const HomeScreenNavigator = () => {
                 component={PokemonScreen}
                 options={({ route }) => ({
                     title: capitalize(route.params.pokemon.name),
-                    headerStyle: {
-                        backgroundColor: '#d3a6c8',
-                        shadowColor: 'transparent',
-                        elevation: 0,
-                        borderBottomWidth: 0,
-                        borderTopRightRadius: 75,
-                        borderTopLeftRadius: 75
-                    }
+                    headerStyle: styles.headerStyle,
+                    cardStyleInterpolator: ({ current }) => ({
+                        cardStyle: {
+                            opacity: current.progress
+                        }
+                    })
                 })}
+                
             />
         </Stack.Navigator>
     )
@@ -169,8 +169,8 @@ const Main = () => {
         <View
             style={{
                 flex: 1,
-                paddingTop:
-                    Platform.OS === 'ios' ? 0 : Constants.statusBarHeight
+                paddingTop: Constants.statusBarHeight,
+                backgroundColor: '#fff'
             }}
         >
             <Drawer.Navigator
@@ -284,6 +284,15 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 24,
         fontWeight: 'bold'
+    },
+    headerStyle: {
+        backgroundColor: '#d3a6c8',
+        shadowColor: 'transparent',
+        elevation: 0,
+        height: Platform.OS === 'ios' ? 80 : 80,
+        borderBottomWidth: 0,
+        borderTopRightRadius: 75,
+        borderTopLeftRadius: 75
     },
     drawerImage: {
         margin: 10,
