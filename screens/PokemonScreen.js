@@ -1,24 +1,24 @@
-<<<<<<< HEAD
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
+import { useState, useEffect } from 'react'
 import RenderPokemon from '../features/RenderPokemon'
-=======
-import { View, Text, StyleSheet } from 'react-native'
-import { useState } from 'react'
->>>>>>> ab1e343b694263a21a523f48f86afa476f9019cc
+import { getPokemonDescription } from '../API/calls'
 
 const PokemonScreen = ({ route }) => {
     const { pokemon } = route.params
+    const [description, setDescription] = useState(null)
+
+    useEffect(() => {
+        getPokemonDescription(pokemon.id).then(desc => setDescription(desc))
+    }, [])
+
     return(
         <View>
             <RenderPokemon
                 pokemon={pokemon}
+                description={description}
             />
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-
-})
 
 export default PokemonScreen

@@ -3,6 +3,7 @@ import Constants from 'expo-constants'
 import { createStackNavigator } from "@react-navigation/stack"
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer"
 import { Icon } from "react-native-elements"
+import capitalize from '../utils/capitalize'
 import gengar from '../shared/img/gengar.png'
 import HomeScreen from "./HomeScreen"
 import PokemonScreen from "./PokemonScreen"
@@ -15,7 +16,7 @@ const Drawer = createDrawerNavigator()
 
 const screenOptions = {
     headerTintColor: '#fff',
-    headerStyle: { backgroundColor: '#d3a6c8'},
+    headerStyle: { backgroundColor: '#d3a6c8' },
     headerTitleAlign: 'center'
 }
 
@@ -35,12 +36,23 @@ const HomeScreenNavigator = () => {
                             onPress={() => navigation.toggleDrawer()}
                             containerStyle={{ marginLeft: 10 }}
                         />
-                    ) 
+                    )
                 })}
             />
             <Stack.Screen
                 name='Pokemon'
                 component={PokemonScreen}
+                options={({ route }) => ({
+                    title: capitalize(route.params.pokemon.name),
+                    headerStyle: {
+                        backgroundColor: '#d3a6c8',
+                        shadowColor: 'transparent',
+                        elevation: 0,
+                        borderBottomWidth: 0,
+                        borderTopRightRadius: 75,
+                        borderTopLeftRadius: 75
+                    }
+                })}
             />
         </Stack.Navigator>
     )
@@ -62,7 +74,7 @@ const MovesScreenNavigator = () => {
                             onPress={() => navigation.toggleDrawer()}
                             containerStyle={{ marginLeft: 10 }}
                         />
-                    ) 
+                    )
                 })}
             />
         </Stack.Navigator>
@@ -85,7 +97,7 @@ const AbilitiesScreenNavigator = () => {
                             onPress={() => navigation.toggleDrawer()}
                             containerStyle={{ marginLeft: 10 }}
                         />
-                    ) 
+                    )
                 })}
             />
         </Stack.Navigator>
@@ -108,7 +120,7 @@ const EvolutionsScreenNavigator = () => {
                             onPress={() => navigation.toggleDrawer()}
                             containerStyle={{ marginLeft: 10 }}
                         />
-                    ) 
+                    )
                 })}
             />
         </Stack.Navigator>
@@ -131,7 +143,7 @@ const GameVersionScreenNavigator = () => {
                             onPress={() => navigation.toggleDrawer()}
                             containerStyle={{ marginLeft: 10 }}
                         />
-                    ) 
+                    )
                 })}
             />
         </Stack.Navigator>
@@ -142,7 +154,7 @@ const CustomDrawerContent = (props) => (
     <DrawerContentScrollView {...props}>
         <View style={styles.drawerHeader}>
             <View style={{ flex: 1 }}>
-                <Image source={gengar} style={styles.drawerImage}/>
+                <Image source={gengar} style={styles.drawerImage} />
             </View>
             <View style={{ flex: 2 }}>
                 <Text style={styles.drawerHeaderText}>PokeNav</Text>
@@ -165,7 +177,7 @@ const Main = () => {
                 initialRouteName='Home'
                 drawerContent={CustomDrawerContent}
                 screenOptions={{
-                    drawerStyle: { backgroundColor: '#fff'},
+                    drawerStyle: { backgroundColor: '#fff' },
                     headerShown: true
                 }}
             >
@@ -266,7 +278,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     drawerHeaderText: {
         color: '#fff',

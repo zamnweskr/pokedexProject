@@ -20,6 +20,16 @@ export const getPokemonByName = async (name) => {
     
 }
 
+export const getPokemonDescription = async (id) => {
+    try{
+        let response = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
+        return response.data
+    } catch(e) {
+        console.log(e)
+        alert('An error has occurred retrieving the pokemon description, chack your connection and try again')
+    }
+} 
+
 export const getPokemonMoves = async (move) => {
     try{
        const response = await axios.get(`https://pokeapi.co/api/v2/move?limit=150`)

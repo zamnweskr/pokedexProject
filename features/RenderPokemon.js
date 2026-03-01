@@ -1,18 +1,42 @@
 import { StyleSheet, Text, View, Image } from 'react-native';
+import capitalize from '../utils/capitalize';
 
 
 const RenderPokemon = (props) => {
-    const { pokemon } = props
+    const { pokemon, description } = props
 
     if (!pokemon) return null
 
     return (
-        <View style={ styles.pokemonContainer }>
-            <Image
-                source={{ uri: pokemon.sprites.other['official-artwork'].front_default}}
-                style={ styles.pokemonImage }
-            />
-        </View>
+        <>
+            <View style={styles.pokemonContainer}>
+                <Image
+                    source={{ uri: pokemon.sprites.other['official-artwork'].front_default }}
+                    style={styles.pokemonImage}
+                />
+            </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
+                {pokemon.types.map((pokemonType) =>
+                    <Text key={pokemonType.type.name}>{capitalize(pokemonType.type.name)}</Text>
+                )}
+            </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
+                <Text>
+                    Height: {pokemon.height /10}m
+                </Text>
+                <Text>
+                    Weight: {pokemon.weight /10}kg
+                </Text>
+            </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
+                <Text>
+                    {description?.flavor_text_entries
+                    ?.find(textEntry => textEntry.language.name === 'en')
+                    ?.flavor_text
+                    }
+                </Text>
+            </View>
+        </>
     )
 }
 
@@ -20,7 +44,7 @@ const styles = StyleSheet.create({
     pokemonContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F08030',
+        backgroundColor: '#d3a6c8',
         borderBottomLeftRadius: 75,
         borderBottomRightRadius: 75
     },

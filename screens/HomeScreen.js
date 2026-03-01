@@ -3,10 +3,10 @@ import { getPokemon, getPokemonByName } from '../API/calls'
 import { useState, useEffect } from 'react'
 import { FlatList } from 'react-native'
 import { Card } from 'react-native-elements'
+import capitalize from '../utils/capitalize'
 
 const HomeScreen = ({ navigation }) => {
     const [pokemon, setPokemon] = useState([])
-    // const [pageCount, setPageCount] = useState(10)
 
     const fetchPokemon = async () => {
         const allPokemon = await getPokemon()
@@ -29,9 +29,9 @@ const HomeScreen = ({ navigation }) => {
         getEachPokemon()
     }, [])
 
-    const capitalize = (name) => {
-        return name[0].toUpperCase() + name.slice(1)
-    }
+    // const capitalize = (name) => {
+    //     return name[0].toUpperCase() + name.slice(1)
+    // }
 
     return (
         <View style={{ flex: 1 }}>
