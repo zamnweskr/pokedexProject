@@ -23,6 +23,8 @@ const screenOptions = {
 
 
 const HomeScreenNavigator = () => {
+    // const { pokemon } = props
+    // const typeName = pokemon.types[0].type.name
     const Stack = createStackNavigator()
     return (
         <Stack.Navigator screenOptions={screenOptions}>
@@ -46,7 +48,10 @@ const HomeScreenNavigator = () => {
                 component={PokemonScreen}
                 options={({ route }) => ({
                     title: capitalize(route.params.pokemon.name),
-                    headerStyle: styles.headerStyle,
+                    headerStyle: [
+                        styles.headerStyle,
+                        { backgroundColor: typeColors[route.params.pokemon.types[0].type.name] }
+                    ],
                     cardStyleInterpolator: ({ current }) => ({
                         cardStyle: {
                             opacity: current.progress
@@ -287,7 +292,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     headerStyle: {
-        backgroundColor: '#d3a6c8',
+        // backgroundColor: '#d3a6c8',
         shadowColor: 'transparent',
         elevation: 0,
         height: Platform.OS === 'ios' ? 80 : 80,
