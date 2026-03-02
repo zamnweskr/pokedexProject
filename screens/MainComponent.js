@@ -1,10 +1,10 @@
 import { Platform, StyleSheet, View, Image, Text } from "react-native"
 import Constants from 'expo-constants'
-import { createStackNavigator } from "@react-navigation/stack"
+import { createStackNavigator, CardStyleInterpolator } from "@react-navigation/stack"
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer"
 import { Icon } from "react-native-elements"
-import { CardStyleInterpolators } from '@react-navigation/stack'
 import capitalize from '../utils/capitalize'
+import typeColors from '../shared/typeColors'
 import gengar from '../shared/img/gengar.png'
 import HomeScreen from "./HomeScreen"
 import PokemonScreen from "./PokemonScreen"
@@ -17,9 +17,10 @@ const Drawer = createDrawerNavigator()
 
 const screenOptions = {
     headerTintColor: '#fff',
-    headerStyle: { backgroundColor: '#d3a6c8', height: 80 },
+    headerStyle: { backgroundColor: '#FF0000', height: 80 },
     headerTitleAlign: 'center'
 }
+
 
 const HomeScreenNavigator = () => {
     const Stack = createStackNavigator()
@@ -52,7 +53,7 @@ const HomeScreenNavigator = () => {
                         }
                     })
                 })}
-                
+
             />
         </Stack.Navigator>
     )

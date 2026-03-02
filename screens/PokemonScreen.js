@@ -1,6 +1,6 @@
 import { View } from 'react-native'
 import { useState, useEffect } from 'react'
-import RenderPokemon from '../features/RenderPokemon'
+import RenderPokemon from '../features/renderPokemon'
 import { getPokemonDescription } from '../API/calls'
 
 const PokemonScreen = ({ route }) => {
