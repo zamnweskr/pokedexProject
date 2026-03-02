@@ -26,7 +26,7 @@ const RenderPokemon = (props) => {
                     return (
                         <Text 
                             key={pokemonType.type.name}
-                            style={ styles.typeStyleText }
+                            style={[ styles.typeStyleText, {backgroundColor: typeColors[pokemonType.type.name]} ]}
                         >
                             {capitalize(pokemonType.type.name)}
                         </Text>
