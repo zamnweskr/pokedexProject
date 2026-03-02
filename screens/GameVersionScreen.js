@@ -4,7 +4,7 @@ const GameVersionScreen = () => {
     return(
         <View>
             <Text>
-                This is the Game Version Screen where you will see the versions of the game the pokemon appear in
+                This is the Game Version Screen where you will see the versions of the game the pokemon appear in.
             </Text>
         </View>
     )
