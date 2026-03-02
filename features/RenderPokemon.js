@@ -7,11 +7,12 @@ import typeColors from '../shared/typeColors';
 
 const RenderPokemon = (props) => {
     const { pokemon, description } = props
-    const typeName = pokemon.types[0].type.name
-    console.log(pokemon.types)
 
     if (!pokemon) return null
 
+    const typeName = pokemon.types[0].type.name
+    console.log(pokemon.types)
+    
     return (
         <>
             <View style={[ styles.pokemonContainer, {backgroundColor: typeColors[typeName]} ]}>
@@ -24,14 +25,10 @@ const RenderPokemon = (props) => {
                 {pokemon.types.map((pokemonType) => {
                     console.log(pokemonType.type.name)
                     return (
-<<<<<<< HEAD
                         <Text 
                             key={pokemonType.type.name}
                             style={ styles.typeStyleText }
                         >
-=======
-                        <Text key={pokemonType.type.name} style={{backgroundColor: typeColors[pokemonType.type.name]}}>
->>>>>>> 43e5dd43c5d9a7ed8edad83ec397a0406640a6db
                             {capitalize(pokemonType.type.name)}
                         </Text>
                     )
