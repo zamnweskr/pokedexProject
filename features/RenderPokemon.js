@@ -24,7 +24,7 @@ const RenderPokemon = (props) => {
                 {pokemon.types.map((pokemonType) => {
                     console.log(pokemonType.type.name)
                     return (
-                        <Text key={pokemonType.type.name}>
+                        <Text key={pokemonType.type.name} style={{backgroundColor: typeColors[pokemonType.type.name]}}>
                             {capitalize(pokemonType.type.name)}
                         </Text>
                     )
