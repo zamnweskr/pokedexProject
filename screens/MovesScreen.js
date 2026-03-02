@@ -1,6 +1,11 @@
 import { FlatList, Text, View, TouchableOpacity, Modal, Button, ActivityIndicator, StyleSheet } from 'react-native'
 import { useState, useEffect } from 'react';
 import { getPokemonMoves, getPokemonMoveDetails } from '../API/calls';
+import capitalize from '../utils/capitalize';
+// import typeColors from '../shared/typeColors';
+
+
+
 
 const MovesScreen = () => {
 
@@ -96,7 +101,7 @@ const MovesScreen = () => {
                 </Text>
                 <Text style={styles.modalText}>
                   <Text style={styles.label}>Type: </Text>
-                  {moveDetails.type?.name}
+                  {capitalize(moveDetails.type?.name)}
                 </Text>
                 <Text style={styles.modalText}>
                   <Text style={styles.label}>Power: </Text>
@@ -112,11 +117,11 @@ const MovesScreen = () => {
                 </Text>
                 <Text style={styles.modalText}>
                   <Text style={styles.label}>Damage Class: </Text>
-                  {moveDetails.damage_class?.name}
+                  {capitalize(moveDetails.damage_class?.name)}
                 </Text>
                 <Text style={styles.modalText}>
                   <Text style={styles.label}>Generation: </Text>
-                  {moveDetails.generation?.name}
+                  {capitalize(moveDetails.generation?.name)}
                 </Text>
               </>
             ) : null}
