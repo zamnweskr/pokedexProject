@@ -23,8 +23,6 @@ const screenOptions = {
 
 
 const HomeScreenNavigator = () => {
-    // const { pokemon } = props
-    // const typeName = pokemon.types[0].type.name
     const Stack = createStackNavigator()
     return (
         <Stack.Navigator screenOptions={screenOptions}>

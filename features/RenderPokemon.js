@@ -24,22 +24,29 @@ const RenderPokemon = (props) => {
                 {pokemon.types.map((pokemonType) => {
                     console.log(pokemonType.type.name)
                     return (
-                        <Text key={pokemonType.type.name}>
+                        <Text 
+                            key={pokemonType.type.name}
+                            style={ styles.typeStyleText }
+                        >
                             {capitalize(pokemonType.type.name)}
                         </Text>
                     )
                 })}
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                <Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+                <Text
+                    style={styles.heightWeightStyle}
+                >
                     Height: {pokemon.height / 10}m
                 </Text>
-                <Text>
+                <Text
+                    style={styles.heightWeightStyle}
+                >
                     Weight: {pokemon.weight / 10}kg
                 </Text>
             </View>
             <View style={styles.pokemonDescription}>
-                <Text style={{ textAlign: 'center' }}>
+                <Text style={styles.descriptionStyle}>
                     {description?.flavor_text_entries
                         ?.find(textEntry => textEntry.language.name === 'en')
                         ?.flavor_text
@@ -65,11 +72,22 @@ const styles = StyleSheet.create({
     },
     typeStyle: {
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'space-evenly',
+    },
+    typeStyleText: {
+        fontSize: 24,
+        marginTop: 30
+    },
+    heightWeightStyle: {
+        marginTop: 30
     },
     pokemonDescription: {
         flexDirection: 'row',
         justifyContent: 'center',
+    },
+    descriptionStyle: {
+        textAlign: 'center',
+        marginTop: 30
     }
 })
 
