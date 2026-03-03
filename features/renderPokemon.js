@@ -90,7 +90,8 @@ const styles = StyleSheet.create({
         paddingVertical: 6,
     },
     heightWeightStyle: {
-        marginTop: 30
+        marginTop: 20,
+        fontSize: 20
     },
     pokemonDescription: {
         margin: 20,

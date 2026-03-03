@@ -57,7 +57,7 @@ const HomeScreen = ({ navigation }) => {
                                         width: 80,
                                         height: 80,
                                     }}
-                                    source={{ uri: pokemon.sprites.front_default }}
+                                    source={{ uri: pokemon.sprites?.front_default }}
                                 />
                             </View>
                             <Card.Divider />
