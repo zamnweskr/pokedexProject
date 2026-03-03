@@ -2,7 +2,7 @@ import { Platform, StyleSheet, View, Image, Text, TouchableOpacity } from "react
 import Constants from 'expo-constants'
 import { createStackNavigator } from "@react-navigation/stack"
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer"
-import { Icon } from "react-native-elements"
+import { Icon } from 'react-native-elements'
 import capitalize from '../utils/capitalize'
 import typeColors from '../shared/typeColors'
 import pokeball from '../shared/img/Poké_Ball_icon.svg.png'
@@ -277,12 +277,13 @@ const Main = () => {
 
 const styles = StyleSheet.create({
     drawerHeader: {
-        backgroundColor: '#d3a6c8',
+        backgroundColor: '#FF0000',
         height: 140,
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1,
         flexDirection: 'row',
+        borderRadius: 20
     },
     drawerHeaderText: {
         color: '#fff',

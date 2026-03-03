@@ -27,10 +27,6 @@ const MovesScreen = () => {
       }
     };
 
-     const capitalize = (name) => {
-        return name[0].toUpperCase() + name.slice(1)
-    }
-
     loadData();
   }, []);
 
@@ -52,7 +48,7 @@ const MovesScreen = () => {
 
     try {
       const details = await getPokemonMoveDetails(move.url);
-     // console.log('Move details:', details); 
+      // console.log('Move details:', details); 
       setMoveDetails(details);
     } catch (error) {
       console.error('Error loading move details:', error);
@@ -69,7 +65,7 @@ const MovesScreen = () => {
         style={styles.item}
         onPress={() => handleMovePress(item)}
       >
-        <Text style={styles.moveName}>{item.name}</Text>
+        <Text style={styles.abilityName}>{item.name}</Text>
       </TouchableOpacity>
     );
   };
@@ -123,12 +119,12 @@ const MovesScreen = () => {
                   <Text style={styles.label}>Generation: </Text>
                   {capitalize(moveDetails.generation?.name)}
                 </Text>
-                    <Text style={styles.modalDescription}>
-      <Text style={styles.label}>Description: </Text>
-      {moveDetails.flavor_text_entries?.find(
-        entry => entry.language.name === 'en'
-      )?.flavor_text || 'No description available'}
-    </Text>
+                <Text style={styles.modalDescription}>
+                  <Text style={styles.label}>Description: </Text>
+                  {moveDetails.flavor_text_entries?.find(
+                    entry => entry.language.name === 'en'
+                  )?.flavor_text || 'No description available'}
+                </Text>
               </>
             ) : null}
 
@@ -159,7 +155,7 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
     marginBottom: 5,
     borderRadius: 8
-  },  abilityName: {
+  }, abilityName: {
     fontSize: 16,
     fontWeight: 'bold',
     textTransform: 'capitalize'
@@ -188,18 +184,17 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center'
   },
-  label: {
   modalDescription: {
-  fontSize: 14,
-  marginTop: 10,
-  marginBottom: 10,
-  fontStyle: 'italic',
-  color: '#555'
-},
-   label: {
+    fontSize: 14,
+    marginTop: 10,
+    marginBottom: 10,
+    fontStyle: 'italic',
+    color: '#555'
+  },
+  label: {
     fontWeight: 'bold'
   }
-}
+
 });
 
 
