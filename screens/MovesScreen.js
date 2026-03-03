@@ -159,8 +159,7 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
     marginBottom: 5,
     borderRadius: 8
-  },
-  abilityName: {
+  },  abilityName: {
     fontSize: 16,
     fontWeight: 'bold',
     textTransform: 'capitalize'
