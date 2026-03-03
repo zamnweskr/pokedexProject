@@ -23,10 +23,6 @@ const AbilitiesScreen = () => {
             }
         };
 
-        const capitalize = (name) => {
-            return name[0].toUpperCase() + name.slice(1)
-        }
-
         loadData();
     }, []);
 
@@ -48,7 +44,7 @@ const AbilitiesScreen = () => {
 
         try {
             const details = await getPokemonAbilityDetails(ability.url);
-            console.log('Ability details:', details);
+            // console.log('Ability details:', details);
             setAbilityDetails(details);
         } catch (error) {
             console.error('Error loading ability details:', error);
@@ -63,7 +59,7 @@ const AbilitiesScreen = () => {
                 style={styles.item}
                 onPress={() => handleAbilityPress(item)}
             >
-                <Text style={styles.abilityName}>{item.name}</Text>
+                <Text style={styles.abilityName}>{capitalize(item.name)}</Text>
             </TouchableOpacity>
         );
     };
@@ -100,14 +96,14 @@ const AbilitiesScreen = () => {
 
                                 <Text style={styles.modalDescription}>
                                     <Text style={styles.label}>Description: </Text>
-                                    {abilityDetails.effect_entries?.find(
+                                    {capitalize(abilityDetails.effect_entries?.find(
                                         entry => entry.language.name === 'en'
-                                    )?.effect || 'No description available'}
+                                    )?.effect || 'No description available')}
                                 </Text>
 
                                 <Text style={styles.modalText}>
                                     <Text style={styles.label}>Generation: </Text>
-                                    {abilityDetails.generation?.name}
+                                    {capitalize(abilityDetails.generation?.name)}
                                 </Text>
                             </>
                         ) : null}
