@@ -1,6 +1,6 @@
 import { Platform, StyleSheet, View, Image, Text } from "react-native"
 import Constants from 'expo-constants'
-import { createStackNavigator, CardStyleInterpolator } from "@react-navigation/stack"
+import { createStackNavigator } from "@react-navigation/stack"
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer"
 import { Icon } from "react-native-elements"
 import capitalize from '../utils/capitalize'

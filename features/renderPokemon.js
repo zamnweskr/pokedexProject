@@ -12,10 +12,10 @@ const RenderPokemon = (props) => {
 
     const typeName = pokemon.types[0].type.name
     console.log(pokemon.types)
-    
+
     return (
         <>
-            <View style={[ styles.pokemonContainer, {backgroundColor: typeColors[typeName]} ]}>
+            <View style={[styles.pokemonContainer, { backgroundColor: typeColors[typeName] }]}>
                 <Image
                     source={{ uri: pokemon.sprites.other['official-artwork'].front_default }}
                     style={styles.pokemonImage}
@@ -25,9 +25,15 @@ const RenderPokemon = (props) => {
                 {pokemon.types.map((pokemonType) => {
                     console.log(pokemonType.type.name)
                     return (
-                        <Text 
+                        <Text
                             key={pokemonType.type.name}
-                            style={[ styles.typeStyleText, {backgroundColor: typeColors[pokemonType.type.name]} ]}
+                            style={[
+                                styles.typeStyleText,
+                                {
+                                    backgroundColor: typeColors[pokemonType.type.name],
+                                    borderColor: typeColors[pokemonType.type.name]
+                                }
+                            ]}
                         >
                             {capitalize(pokemonType.type.name)}
                         </Text>
@@ -77,7 +83,9 @@ const styles = StyleSheet.create({
     },
     typeStyleText: {
         fontSize: 24,
-        marginTop: 30
+        marginTop: 30,
+        borderWidth: 10,
+        borderRadius: 15
     },
     heightWeightStyle: {
         marginTop: 30
