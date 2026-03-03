@@ -1,11 +1,11 @@
-import { Platform, StyleSheet, View, Image, Text } from "react-native"
+import { Platform, StyleSheet, View, Image, Text, TouchableOpacity } from "react-native"
 import Constants from 'expo-constants'
 import { createStackNavigator } from "@react-navigation/stack"
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer"
 import { Icon } from "react-native-elements"
 import capitalize from '../utils/capitalize'
 import typeColors from '../shared/typeColors'
-import gengar from '../shared/img/gengar.png'
+import pokeball from '../shared/img/Poké_Ball_icon.svg.png'
 import HomeScreen from "./HomeScreen"
 import PokemonScreen from "./PokemonScreen"
 import MovesScreen from "./MovesScreen"
@@ -32,12 +32,12 @@ const HomeScreenNavigator = () => {
                 options={({ navigation }) => ({
                     title: 'Home',
                     headerLeft: () => (
-                        <Icon
-                            name='star'
-                            type='font-awesome'
+                        <TouchableOpacity
                             onPress={() => navigation.toggleDrawer()}
-                            containerStyle={{ marginLeft: 10 }}
-                        />
+                            style={{ marginLeft: 10 }}
+                        >
+                            <Image source={pokeball} style={{ width: 30, height: 30 }} />
+                        </TouchableOpacity>
                     )
                 })}
             />
@@ -72,12 +72,12 @@ const MovesScreenNavigator = () => {
                 options={({ navigation }) => ({
                     title: 'Moves',
                     headerLeft: () => (
-                        <Icon
-                            name='star'
-                            type='font-awesome'
+                        <TouchableOpacity
                             onPress={() => navigation.toggleDrawer()}
-                            containerStyle={{ marginLeft: 10 }}
-                        />
+                            style={{ marginLeft: 10 }}
+                        >
+                            <Image source={pokeball} style={{ width: 30, height: 30 }} />
+                        </TouchableOpacity>
                     )
                 })}
             />
@@ -95,12 +95,12 @@ const AbilitiesScreenNavigator = () => {
                 options={({ navigation }) => ({
                     title: 'Abilities',
                     headerLeft: () => (
-                        <Icon
-                            name='star'
-                            type='font-awesome'
+                        <TouchableOpacity
                             onPress={() => navigation.toggleDrawer()}
-                            containerStyle={{ marginLeft: 10 }}
-                        />
+                            style={{ marginLeft: 10 }}
+                        >
+                            <Image source={pokeball} style={{ width: 30, height: 30 }} />
+                        </TouchableOpacity>
                     )
                 })}
             />
@@ -118,12 +118,12 @@ const EvolutionsScreenNavigator = () => {
                 options={({ navigation }) => ({
                     title: 'Evolutions',
                     headerLeft: () => (
-                        <Icon
-                            name='star'
-                            type='font-awesome'
+                        <TouchableOpacity
                             onPress={() => navigation.toggleDrawer()}
-                            containerStyle={{ marginLeft: 10 }}
-                        />
+                            style={{ marginLeft: 10 }}
+                        >
+                            <Image source={pokeball} style={{ width: 30, height: 30 }} />
+                        </TouchableOpacity>
                     )
                 })}
             />
@@ -141,12 +141,12 @@ const GameVersionScreenNavigator = () => {
                 options={({ navigation }) => ({
                     title: 'Game Version',
                     headerLeft: () => (
-                        <Icon
-                            name='star'
-                            type='font-awesome'
+                        <TouchableOpacity
                             onPress={() => navigation.toggleDrawer()}
-                            containerStyle={{ marginLeft: 10 }}
-                        />
+                            style={{ marginLeft: 10 }}
+                        >
+                            <Image source={pokeball} style={{ width: 30, height: 30 }} />
+                        </TouchableOpacity>
                     )
                 })}
             />
@@ -158,7 +158,7 @@ const CustomDrawerContent = (props) => (
     <DrawerContentScrollView {...props}>
         <View style={styles.drawerHeader}>
             <View style={{ flex: 1 }}>
-                <Image source={gengar} style={styles.drawerImage} />
+                <Image source={pokeball} style={styles.drawerImage} />
             </View>
             <View style={{ flex: 2 }}>
                 <Text style={styles.drawerHeaderText}>PokeNav</Text>
