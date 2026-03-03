@@ -92,8 +92,6 @@ const AbilitiesScreen = () => {
                         ) : abilityDetails ? (
                             <>
 
-
-
                                 <Text style={styles.modalDescription}>
                                     <Text style={styles.label}>Description: </Text>
                                     {capitalize(abilityDetails.effect_entries?.find(

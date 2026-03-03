@@ -84,19 +84,27 @@ const styles = StyleSheet.create({
     typeStyleText: {
         fontSize: 24,
         marginTop: 30,
-        borderWidth: 10,
-        borderRadius: 15
+        borderWidth: 2,
+        borderRadius: 20,
+        paddingHorizontal: 14,
+        paddingVertical: 6,
     },
     heightWeightStyle: {
         marginTop: 30
     },
     pokemonDescription: {
-        flexDirection: 'row',
-        justifyContent: 'center',
+        margin: 20,
+        padding: 16,
+        backgroundColor: '#f9f9f9',
+        borderRadius: 12,
+        borderWidth: 3,
+        borderColor: '#ddd'
     },
     descriptionStyle: {
         textAlign: 'center',
-        marginTop: 30
+        fontSize: 16,
+        lineHeight: 22,
+        color: '#333'
     }
 })
 
