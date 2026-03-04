@@ -1,4 +1,4 @@
-import { View } from 'react-native'
+import { ScrollView } from 'react-native'
 import { useState, useEffect } from 'react'
 import { getPokemonDescription } from '../API/calls'
 import RenderPokemon from '../features/renderPokemon'
@@ -12,12 +12,12 @@ const PokemonScreen = ({ route }) => {
     }, [])
 
     return(
-        <View>
+        <ScrollView>
             <RenderPokemon
                 pokemon={pokemon}
                 description={description}
             />
-        </View>
+        </ScrollView>
     )
 }
 
