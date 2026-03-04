@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import capitalize from '../utils/capitalize';
 import typeColors from '../shared/typeColors';
 import Slider from '@react-native-community/slider'
@@ -15,13 +15,14 @@ const RenderPokemon = (props) => {
     // console.log(pokemon.types)
 
     return (
-        <>
+        <View style={{ flex: 1 }}>
             <View style={[styles.pokemonContainer, { backgroundColor: typeColors[typeName] }]}>
                 <Image
                     source={{ uri: pokemon.sprites.other['official-artwork'].front_default }}
                     style={styles.pokemonImage}
                 />
             </View>
+            <ScrollView>
             <View style={styles.typeStyle}>
                 {pokemon.types.map((pokemonType) => {
                     // console.log(pokemonType.type.name)
@@ -111,7 +112,8 @@ const RenderPokemon = (props) => {
                     Speed: {pokemon.stats[5].base_stat}
                 </Text> */}
             </View>
-        </>
+            </ScrollView>
+        </View>
     )
 }
 
