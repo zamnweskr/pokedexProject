@@ -73,6 +73,16 @@ export const getPokemonAbility = async (ability) => {
   }
 };
 
+export const getEvolutionChain = async (id) => {
+    try {
+        const response = await axios.get(`https://pokeapi.co/api/v2/evolution-chain/${id}`)
+        return response.data
+    } catch (e) {
+        console.error(e);
+        alert('Sorry, could not fetch evolution chain.')
+    }
+}
+
 // I dont think I will need this function anymore as we arent going by pages and we can just render all the pokemon at once in a flatlist 
 
 // export const getPokemonByPage = async(Page = 10) => {

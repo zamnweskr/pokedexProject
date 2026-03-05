@@ -1,13 +1,88 @@
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { useState, useEffect } from 'react';
+import { getEvolutionChain, getPokemon } from '../API/calls';
+import { FlatList } from 'react-native'
+import { Card } from 'react-native-elements'
 
-const EvolutionsScreen = () => {
-    return(
+const EvolutionsScreen = ({ navigation }) => {
+    const [pokemon, setPokemon] = useState([])
+
+    const fetchPokemon = async () => {
+        const allPokemon = await getPokemon()
+        return allPokemon
+    }
+
+    const fetchSpecies = async () => {
+        const allSpecies = await getEvolutionChain()
+        return allSpecies
+    }
+
+    const getEachPokemon = async () => {
+        const retrievedPokemon = await fetchPokemon()
+        const results = await Promise.all(
+            retrievedPokemon.results.map(async (currentPokemon) => {
+                let response = await getPokemonByName(currentPokemon.name)
+                return { ...currentPokemon, ...response.data }
+            })
+        )
+        setPokemon(results)
+    }
+
+    useEffect(() => {
+        setPokemon([])
+        fetchSpecies()
+        getEachPokemon()
+        getEvolutionChain()
+    }, [])
+
+    return (
         <View>
-            <Text>
-                This is the Evolutions Screen where you will see the different evolutions that are available to a pokemon
-            </Text>
+            <FlatList
+                style={{ width: '100%' }}
+                data={pokemon}
+                keyExtractor={(pokemon) => pokemon.name}
+                numColumns={1}
+                renderItem={({ item: pokemon }) => (
+                    <TouchableOpacity
+                        style={{ flex: 1, margin: 4 }}
+                        onPress={() =>
+                            navigation.navigate('Pokemon', { pokemon: pokemon })
+                        }
+                    >
+                        <Card containerStyle={{ margin: 0, borderRadius: 12 }}>
+                            <Text style={{ alignSelf: 'flex-start' }}>
+                                {pokemon.id}
+                            </Text>
+                            <Card.Title>
+                                {capitalize(pokemon.name)}
+                            </Card.Title>
+                            <Card.Divider />
+                            <View style={{ alignSelf: 'center' }}>
+                                <Card.Image
+                                    style={{
+                                        width: 80,
+                                        height: 80,
+                                    }}
+                                    source={{ uri: pokemon.sprites.front_default }}
+                                />
+                            </View>
+                            <Card.Divider />
+                            <Text style={{ textAlign: 'center' }}>
+                                {capitalize(pokemon.types[0].type.name)}
+                            </Text>
+                        </Card>
+                    </TouchableOpacity>
+
+                )}
+            />
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    imgBorder: {
+
+    }
+})
 
 export default EvolutionsScreen

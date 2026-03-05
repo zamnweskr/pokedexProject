@@ -1,4 +1,4 @@
-import { Button, View, Text, TouchableOpacity, Image } from 'react-native'
+import { Button, View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native'
 import { getPokemon, getPokemonByName } from '../API/calls'
 import { useState, useEffect } from 'react'
 import { FlatList } from 'react-native'
@@ -61,7 +61,7 @@ const HomeScreen = ({ navigation }) => {
                                 />
                             </View>
                             <Card.Divider />
-                            <Text style={{ textAlign: 'center' }}>
+                            <Text style={{ textAlign: 'center'}}>
                                 {capitalize(pokemon.types[0].type.name)}
                             </Text>
                         </Card>
@@ -72,5 +72,11 @@ const HomeScreen = ({ navigation }) => {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    typeHome: {
+        textAlign: 'center'
+    }
+})
 
 export default HomeScreen
