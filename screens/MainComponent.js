@@ -12,6 +12,7 @@ import MovesScreen from "./MovesScreen"
 import AbilitiesScreen from "./AbilitiesScreen"
 import GameVersionScreen from "./GameVersionScreen"
 import EvolutionsScreen from "./EvolutionsScreen"
+import PokemonMovesDetailScreen from "./PokemonMovesDetailScreen"
 
 const Drawer = createDrawerNavigator()
 
@@ -56,8 +57,9 @@ const HomeScreenNavigator = () => {
                         }
                     })
                 })}
-
+                
             />
+
         </Stack.Navigator>
     )
 }
@@ -80,6 +82,7 @@ const MovesScreenNavigator = () => {
                         </TouchableOpacity>
                     )
                 })}
+                
             />
         </Stack.Navigator>
     )
@@ -140,6 +143,29 @@ const GameVersionScreenNavigator = () => {
                 component={GameVersionScreen}
                 options={({ navigation }) => ({
                     title: 'Game Version',
+                    headerLeft: () => (
+                        <TouchableOpacity
+                            onPress={() => navigation.toggleDrawer()}
+                            style={{ marginLeft: 10 }}
+                        >
+                            <Image source={pokeball} style={{ width: 30, height: 30 }} />
+                        </TouchableOpacity>
+                    )
+                })}
+            />
+        </Stack.Navigator>
+    )
+}
+
+const PokemonMovesScreenNavigator = () => {
+    const Stack = createStackNavigator()
+    return (
+        <Stack.Navigator screenOptions={screenOptions}>
+            <Stack.Screen
+                name='PokemonMovesDetailScreen'
+                component={PokemonMovesDetailScreen}
+                options={({ navigation }) => ({
+                    title: 'PokemonMovesDetailScreen',
                     headerLeft: () => (
                         <TouchableOpacity
                             onPress={() => navigation.toggleDrawer()}
@@ -270,6 +296,27 @@ const Main = () => {
                         )
                     }}
                 />
+
+           
+            <Drawer.Screen
+                    name='PokemonMovesScreen'
+                    component={PokemonMovesScreenNavigator}
+                    options={{
+                        title: '',
+                        headerShown: false,
+                        drawerIcon: ({ color }) => (
+                            <Icon
+                                name='star'
+                                type='font-awesome'
+                                size={24}
+                                iconStyle={{ width: 24 }}
+                                color={color}
+                            />
+                        )
+                    }}
+                /> 
+                
+
             </Drawer.Navigator>
         </View>
     )

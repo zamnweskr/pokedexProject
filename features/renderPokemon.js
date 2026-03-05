@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import capitalize from '../utils/capitalize';
 import typeColors from '../shared/typeColors';
 import Slider from '@react-native-community/slider'
@@ -8,6 +9,7 @@ import Slider from '@react-native-community/slider'
 
 const RenderPokemon = (props) => {
     const { pokemon, description } = props
+    const navigation = useNavigation();
 
     if (!pokemon) return null
 
@@ -64,6 +66,24 @@ const RenderPokemon = (props) => {
                     }
                 </Text>
             </View>
+
+
+               <View style={styles.buttonContainer}>
+                <Button
+                    title="View Moves"
+                    color={typeColors[typeName]}
+                    onPress={() => { 
+                        console.log("Navigating with:", pokemon.name);
+                        navigation.navigate('PokemonMovesScreen', { 
+                        screen: 'PokemonMovesDetailScreen',    
+                        params: { pokemonName: pokemon.name } 
+                        
+                    })}
+                }
+                />
+            </View>
+
+
             <View style={styles.statContainer}>
                 <View style={styles.statContainer}>
                     {pokemon.stats.map((stat) => (
@@ -184,6 +204,12 @@ const styles = StyleSheet.create({
         fontSize: 13,
         color: '#333',
         fontWeight: '600',
+    },
+       buttonContainer: {
+        marginHorizontal: 20,
+        marginVertical: 10,
+        borderRadius: 8,
+        overflow: 'hidden'
     }
 })
 

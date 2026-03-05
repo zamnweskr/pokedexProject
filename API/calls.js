@@ -39,6 +39,18 @@ export const getPokemonMoves = async (move) => {
         alert(`Sorry no moves found.`)
     }
     }
+    export const getPokemonMovesByName = async (pokemonName) => {
+  try {
+    console.log(`Fetching: https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+    return response.data.moves; 
+  } catch (e) {
+    console.error(e);
+    alert(`Sorry, could not fetch moves for ${pokemonName}.`);
+    throw e;
+  }
+}
+
 
     export const getPokemonMoveDetails = async (url) => {
   try {
@@ -49,7 +61,7 @@ export const getPokemonMoves = async (move) => {
     alert('Sorry, could not fetch move details.');
     
   }
-};
+}
 export const getPokemonAbility = async (ability) => {
     try{
        const response = await axios.get(`https://pokeapi.co/api/v2/ability?limit=150`)
@@ -71,7 +83,7 @@ export const getPokemonAbility = async (ability) => {
     alert('Sorry, could not fetch ability details.');
     
   }
-};
+}
 
 // I dont think I will need this function anymore as we arent going by pages and we can just render all the pokemon at once in a flatlist 
 
