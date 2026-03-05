@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Button, View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native'
+=======
+import { View, Text, TouchableOpacity } from 'react-native'
+>>>>>>> origin/main
 import { getPokemon, getPokemonByName } from '../API/calls'
 import { useState, useEffect } from 'react'
 import { FlatList } from 'react-native'
@@ -57,7 +61,7 @@ const HomeScreen = ({ navigation }) => {
                                         width: 80,
                                         height: 80,
                                     }}
-                                    source={{ uri: pokemon.sprites.front_default }}
+                                    source={{ uri: pokemon.sprites?.front_default }}
                                 />
                             </View>
                             <Card.Divider />

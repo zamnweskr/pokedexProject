@@ -1,68 +1,157 @@
-import { StyleSheet, Text, View, Image, Platform } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import capitalize from '../utils/capitalize';
 import typeColors from '../shared/typeColors';
+import Slider from '@react-native-community/slider'
 
 
 
 
 const RenderPokemon = (props) => {
     const { pokemon, description } = props
+    const navigation = useNavigation();
 
     if (!pokemon) return null
 
     const typeName = pokemon.types[0].type.name
-    console.log(pokemon.types)
+    // console.log(pokemon.types)
 
     return (
-        <>
+        <View style={{ flex: 1 }}>
             <View style={[styles.pokemonContainer, { backgroundColor: typeColors[typeName] }]}>
                 <Image
                     source={{ uri: pokemon.sprites.other['official-artwork'].front_default }}
                     style={styles.pokemonImage}
                 />
             </View>
-            <View style={styles.typeStyle}>
-                {pokemon.types.map((pokemonType) => {
-                    console.log(pokemonType.type.name)
-                    return (
-                        <Text
-                            key={pokemonType.type.name}
-                            style={[
-                                styles.typeStyleText,
-                                {
-                                    backgroundColor: typeColors[pokemonType.type.name],
-                                    borderColor: typeColors[pokemonType.type.name]
-                                }
-                            ]}
-                        >
-                            {capitalize(pokemonType.type.name)}
-                        </Text>
-                    )
-                })}
-            </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-                <Text
-                    style={styles.heightWeightStyle}
-                >
-                    Height: {pokemon.height / 10}m
-                </Text>
-                <Text
-                    style={styles.heightWeightStyle}
-                >
-                    Weight: {pokemon.weight / 10}kg
-                </Text>
-            </View>
-            <View style={styles.pokemonDescription}>
-                <Text style={styles.descriptionStyle}>
-                    {description?.flavor_text_entries
-                        ?.find(textEntry => textEntry.language.name === 'en')
-                        ?.flavor_text
-                        ?.replace(/\f/g, ' ')
-                        ?.replace(/\n/g, ' ')
-                    }
-                </Text>
-            </View>
-        </>
+            <ScrollView>
+                <View style={styles.typeStyle}>
+                    {pokemon.types.map((pokemonType) => {
+                        // console.log(pokemonType.type.name)
+                        return (
+                            <Text
+                                key={pokemonType.type.name}
+                                style={[
+                                    styles.typeStyleText,
+                                    {
+                                        backgroundColor: typeColors[pokemonType.type.name],
+                                        borderColor: typeColors[pokemonType.type.name]
+                                    }
+                                ]}
+                            >
+                                {capitalize(pokemonType.type.name)}
+                            </Text>
+                        )
+                    })}
+                </View>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+                    <Text
+                        style={styles.heightWeightStyle}
+                    >
+                        Height: {pokemon.height / 10}m
+                    </Text>
+                    <Text
+                        style={styles.heightWeightStyle}
+                    >
+                        Weight: {pokemon.weight / 10}kg
+                    </Text>
+                </View>
+                <View style={styles.pokemonDescription}>
+                    <Text style={styles.descriptionStyle}>
+                        {description?.flavor_text_entries
+                            ?.find(textEntry => textEntry.language.name === 'en')
+                            ?.flavor_text
+                            ?.replace(/\f/g, ' ')
+                            ?.replace(/\n/g, ' ')
+                        }
+                    </Text>
+                </View>
+
+
+                <View style={styles.buttonContainer}>
+                    {/* <Button
+                    title="View Moves"
+                    color={typeColors[typeName]}
+                    onPress={() => { 
+                        console.log("Navigating with:", pokemon.name);
+                        navigation.navigate(
+                            'PokemonMoves',
+                            { pokemon: pokemon }
+                        )}
+                }
+                /> */}
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate(
+                            'PokemonMoves',
+                            {pokemon: pokemon}
+                        )}
+                        style={{ backgroundColor: typeColors[typeName], padding: 12 }}
+                    >
+                        <Text style={styles.viewMovesButton}>View Moves</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate(
+                            'Evolutions',
+                            {pokemon: pokemon}
+                        )}
+                        style={{ backgroundColor: typeColors[typeName], padding: 12, marginTop: 10 }}
+                    >
+                        <Text style={styles.viewMovesButton}>View Evos</Text>
+                    </TouchableOpacity>
+                </View>
+
+
+                <View style={styles.statContainer}>
+                    <View style={styles.statContainer}>
+                        {pokemon.stats.map((stat) => (
+                            <View key={stat.stat.name} style={styles.statRow}>
+                                <Text style={styles.statLabel}>{capitalize(stat.stat.name)}</Text>
+                                <View style={styles.statSlider} pointerEvents="none">
+                                    <Slider
+                                        style={{ flex: 1 }}
+                                        value={stat.base_stat}
+                                        maximumValue={255}
+                                        minimumValue={0}
+                                        step={1}
+                                        animateTransitions
+                                        minimumTrackTintColor={typeColors[typeName]}
+                                        maximumTrackTintColor='#e0e0e0'
+                                        // thumbTintColor={typeColors[typeName]}
+                                        thumbTintColor='transparent'
+                                    />
+                                </View>
+                                <Text style={styles.statValue}>{stat.base_stat}</Text>
+                            </View>
+                        ))}
+                    </View>
+                    {/* <FlatList
+                    data={pokemon.stats}
+                    keyExtractor={pokemon => pokemon.stat.name}
+                    scrollEnabled={false}
+                    renderItem={({ item: pokemon }) => (
+                        <Slider
+                            value={pokemon.base_stat}
+                            maximumValue={300}
+                            minimumValue={0}
+                            step={1}
+                            animateTransitions
+                            disabled
+                            trackStyle={{ height: 5, backgroundColor: 'transparent' }}
+                        />
+                    )}
+                /> */}
+                    {/* <Text style={styles.statStyle}>
+                    HP: {pokemon.stats[0].base_stat}
+                    {console.log(pokemon.stats)}
+                    Attack: {pokemon.stats[1].base_stat}
+                    Defense: {pokemon.stats[2].base_stat}
+                    Special Attack: {pokemon.stats[3].base_stat}
+                    Special Defense: {pokemon.stats[4].base_stat}
+                    Speed: {pokemon.stats[5].base_stat}
+                </Text> */}
+                </View>
+            </ScrollView>
+        </View>
     )
 }
 
@@ -90,7 +179,8 @@ const styles = StyleSheet.create({
         paddingVertical: 6,
     },
     heightWeightStyle: {
-        marginTop: 30
+        marginTop: 20,
+        fontSize: 20
     },
     pokemonDescription: {
         margin: 20,
@@ -105,6 +195,44 @@ const styles = StyleSheet.create({
         fontSize: 16,
         lineHeight: 22,
         color: '#333'
+    },
+    statContainer: {
+        paddingHorizontal: 16,
+        marginTop: 10,
+        marginBottom: 30,
+    },
+    statRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginVertical: 2,
+    },
+    statLabel: {
+        width: 110,
+        fontSize: 13,
+        color: '#555',
+        fontWeight: '500',
+    },
+    statSlider: {
+        flex: 1,
+        height: 40,
+    },
+    statValue: {
+        width: 35,
+        textAlign: 'right',
+        fontSize: 13,
+        color: '#333',
+        fontWeight: '600',
+    },
+    buttonContainer: {
+        marginHorizontal: 20,
+        marginVertical: 10,
+        borderRadius: 8,
+        overflow: 'hidden'
+    },
+    viewMovesButton: {
+        color: '#FFF',
+        textAlign: 'center',
+        fontWeight: 'bold',
     }
 })
 

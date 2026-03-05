@@ -12,7 +12,7 @@ const PokemonScreen = ({ route }) => {
     }, [])
 
     return(
-        <View>
+        <View style={{ flex: 1 }}>
             <RenderPokemon
                 pokemon={pokemon}
                 description={description}
