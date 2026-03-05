@@ -89,6 +89,15 @@ const RenderPokemon = (props) => {
                     >
                         <Text style={styles.viewMovesButton}>View Moves</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate(
+                            'Evolutions',
+                            {pokemon: pokemon}
+                        )}
+                        style={{ backgroundColor: typeColors[typeName], padding: 12, marginTop: 10 }}
+                    >
+                        <Text style={styles.viewMovesButton}>View Evos</Text>
+                    </TouchableOpacity>
                 </View>
 
 
@@ -107,6 +116,7 @@ const RenderPokemon = (props) => {
                                         animateTransitions
                                         minimumTrackTintColor={typeColors[typeName]}
                                         maximumTrackTintColor='#e0e0e0'
+                                        // thumbTintColor={typeColors[typeName]}
                                         thumbTintColor='transparent'
                                     />
                                 </View>
@@ -222,7 +232,7 @@ const styles = StyleSheet.create({
     viewMovesButton: {
         color: '#FFF',
         textAlign: 'center',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     }
 })
 
