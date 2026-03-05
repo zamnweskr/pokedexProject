@@ -6,6 +6,11 @@ import { Icon } from 'react-native-elements'
 import capitalize from '../utils/capitalize'
 import typeColors from '../shared/typeColors'
 import pokeball from '../shared/img/Poké_Ball_icon.svg.png'
+import abilityIcon from '../shared/img/abilityIcon.png'
+import movesIcon from '../shared/img/movesIcon.png'
+import gyrados from '../shared/img/gyrados.png'
+import pikachu from '../shared/img/pika.png'
+import GByellow from '../shared/img/version.png'
 import HomeScreen from "./HomeScreen"
 import PokemonScreen from "./PokemonScreen"
 import MovesScreen from "./MovesScreen"
@@ -19,7 +24,7 @@ const Drawer = createDrawerNavigator()
 const screenOptions = {
     headerTintColor: '#fff',
     headerStyle: { backgroundColor: '#FF0000', height: 80 },
-    headerTitleAlign: 'center'
+    headerTitleAlign: 'center',
 }
 
 
@@ -225,7 +230,8 @@ const Main = () => {
                 drawerContent={CustomDrawerContent}
                 screenOptions={{
                     drawerStyle: { backgroundColor: '#fff' },
-                    headerShown: true
+                    headerShown: true,
+                    drawerLabelStyle: { fontSize: 18 }
                 }}
             >
                 <Drawer.Screen
@@ -241,87 +247,100 @@ const Main = () => {
                         }
                     }
                     )}
-                    options={{
+                    options={({ navigation }) => ({
                         title: 'Pokemon',
                         headerShown: false,
-                        drawerIcon: ({ color }) => (
-                            <Icon
-                                name='star'
-                                type='font-awesome'
-                                size={24}
-                                iconStyle={{ width: 24 }}
-                                color={color}
-                            />
+                        drawerIcon: () => (
+                            <TouchableOpacity
+                                onPress={() => navigation.navigate(
+                                    'Home',
+                                    {screen: 'Home' }
+                                )}
+                            >
+                                <Image source={pikachu} style={{ width: 40, height: 40 }} />
+                            </TouchableOpacity>
                         )
-                    }}
+                    })}
+                // options={{
+                //     title: 'Pokemon',
+                //     headerShown: false,
+                //     drawerIcon: () =>
+                //         <TouchableOpacity>
+                //             <Image source={pikachu} style={{ width: 40, height: 40 }} />
+                //         </TouchableOpacity>
+                // }}
                 />
                 <Drawer.Screen
                     name='Moves'
                     component={MovesScreenNavigator}
-                    options={{
+                    options={({ navigation }) => ({
                         title: 'Moves',
                         headerShown: false,
-                        drawerIcon: ({ color }) => (
-                            <Icon
-                                name='star'
-                                type='font-awesome'
-                                size={24}
-                                iconStyle={{ width: 24 }}
-                                color={color}
-                            />
+                        drawerIcon: () => (
+                            <TouchableOpacity
+                                onPress={() => navigation.navigate(
+                                    'Moves',
+                                    {screen: 'Moves' }
+                                )}
+                            >
+                                <Image source={movesIcon} style={{ width: 40, height: 40 }} />
+                            </TouchableOpacity>
                         )
-                    }}
+                    })}
                 />
                 <Drawer.Screen
                     name='Abilities'
                     component={AbilitiesScreenNavigator}
-                    options={{
+                    options={({ navigation }) => ({
                         title: 'Abilities',
                         headerShown: false,
-                        drawerIcon: ({ color }) => (
-                            <Icon
-                                name='star'
-                                type='font-awesome'
-                                size={24}
-                                iconStyle={{ width: 24 }}
-                                color={color}
-                            />
+                        drawerIcon: () => (
+                            <TouchableOpacity
+                                onPress={() => navigation.navigate(
+                                    'Abilities',
+                                    {screen: 'Abilities' }
+                                )}
+                            >
+                                <Image source={abilityIcon} style={{ width: 40, height: 40 }} />
+                            </TouchableOpacity>
                         )
-                    }}
+                    })}
                 />
                 <Drawer.Screen
                     name='Evolutions'
                     component={EvolutionsScreenNavigator}
-                    options={{
+                    options={({ navigation }) => ({
                         title: 'Evolutions',
                         headerShown: false,
-                        drawerIcon: ({ color }) => (
-                            <Icon
-                                name='star'
-                                type='font-awesome'
-                                size={24}
-                                iconStyle={{ width: 24 }}
-                                color={color}
-                            />
+                        drawerIcon: () => (
+                            <TouchableOpacity
+                                onPress={() => navigation.navigate(
+                                    'Evolutions',
+                                    {screen: 'Evolutions' }
+                                )}
+                            >
+                                <Image source={gyrados} style={{ width: 40, height: 40 }} />
+                            </TouchableOpacity>
                         )
-                    }}
+                    })}
                 />
                 <Drawer.Screen
                     name='Game Version'
                     component={GameVersionScreenNavigator}
-                    options={{
+                    options={({ navigation }) => ({
                         title: 'Game Version',
                         headerShown: false,
-                        drawerIcon: ({ color }) => (
-                            <Icon
-                                name='star'
-                                type='font-awesome'
-                                size={24}
-                                iconStyle={{ width: 24 }}
-                                color={color}
-                            />
+                        drawerIcon: () => (
+                            <TouchableOpacity
+                                onPress={() => navigation.navigate(
+                                    'Game Version',
+                                    {screen: 'Game Version' }
+                                )}
+                            >
+                                <Image source={GByellow} style={{ width: 40, height: 40 }} />
+                            </TouchableOpacity>
                         )
-                    }}
+                    })}
                 />
                 {/* <Drawer.Screen
                     name='PokemonMovesScreen'
