@@ -59,6 +59,23 @@ const HomeScreenNavigator = () => {
                 })}
                 
             />
+            <Stack.Screen
+                name='PokemonMoves'
+                component={PokemonMovesDetailScreen}
+                options={({ route }) => ({
+                    title: capitalize(route.params.pokemon.name),
+                    headerStyle: [
+                        styles.headerStyle,
+                        { backgroundColor: typeColors[route.params.pokemon.types[0].type.name] }
+                    ],
+                    cardStyleInterpolator: ({ current }) => ({
+                        cardStyle: {
+                            opacity: current.progress
+                        }
+                    })
+                })}
+                
+            />
 
         </Stack.Navigator>
     )
@@ -296,9 +313,7 @@ const Main = () => {
                         )
                     }}
                 />
-
-           
-            <Drawer.Screen
+            {/* <Drawer.Screen
                     name='PokemonMovesScreen'
                     component={PokemonMovesScreenNavigator}
                     options={{
@@ -314,9 +329,7 @@ const Main = () => {
                             />
                         )
                     }}
-                /> 
-                
-
+                />  */}
             </Drawer.Navigator>
         </View>
     )

@@ -74,11 +74,10 @@ const RenderPokemon = (props) => {
                     color={typeColors[typeName]}
                     onPress={() => { 
                         console.log("Navigating with:", pokemon.name);
-                        navigation.navigate('PokemonMovesScreen', { 
-                        screen: 'PokemonMovesDetailScreen',    
-                        params: { pokemonName: pokemon.name } 
-                        
-                    })}
+                        navigation.navigate(
+                            'PokemonMoves',
+                            { pokemon: pokemon }
+                        )}
                 }
                 />
             </View>
