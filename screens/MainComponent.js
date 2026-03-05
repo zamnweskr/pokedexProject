@@ -31,7 +31,7 @@ const HomeScreenNavigator = () => {
                 name='Home'
                 component={HomeScreen}
                 options={({ navigation }) => ({
-                    title: 'Home',
+                    title: 'Pokemon',
                     headerLeft: () => (
                         <TouchableOpacity
                             onPress={() => navigation.toggleDrawer()}
@@ -57,7 +57,7 @@ const HomeScreenNavigator = () => {
                         }
                     })
                 })}
-                
+
             />
             <Stack.Screen
                 name='PokemonMoves'
@@ -74,7 +74,7 @@ const HomeScreenNavigator = () => {
                         }
                     })
                 })}
-                
+
             />
 
         </Stack.Navigator>
@@ -99,7 +99,7 @@ const MovesScreenNavigator = () => {
                         </TouchableOpacity>
                     )
                 })}
-                
+
             />
         </Stack.Navigator>
     )
@@ -174,28 +174,28 @@ const GameVersionScreenNavigator = () => {
     )
 }
 
-const PokemonMovesScreenNavigator = () => {
-    const Stack = createStackNavigator()
-    return (
-        <Stack.Navigator screenOptions={screenOptions}>
-            <Stack.Screen
-                name='PokemonMovesDetailScreen'
-                component={PokemonMovesDetailScreen}
-                options={({ navigation }) => ({
-                    title: 'PokemonMovesDetailScreen',
-                    headerLeft: () => (
-                        <TouchableOpacity
-                            onPress={() => navigation.toggleDrawer()}
-                            style={{ marginLeft: 10 }}
-                        >
-                            <Image source={pokeball} style={{ width: 30, height: 30 }} />
-                        </TouchableOpacity>
-                    )
-                })}
-            />
-        </Stack.Navigator>
-    )
-}
+// const PokemonMovesScreenNavigator = () => {
+//     const Stack = createStackNavigator()
+//     return (
+//         <Stack.Navigator screenOptions={screenOptions}>
+//             <Stack.Screen
+//                 name='PokemonMovesDetailScreen'
+//                 component={PokemonMovesDetailScreen}
+//                 options={({ navigation }) => ({
+//                     title: 'PokemonMovesDetailScreen',
+//                     headerLeft: () => (
+//                         <TouchableOpacity
+//                             onPress={() => navigation.toggleDrawer()}
+//                             style={{ marginLeft: 10 }}
+//                         >
+//                             <Image source={pokeball} style={{ width: 30, height: 30 }} />
+//                         </TouchableOpacity>
+//                     )
+//                 })}
+//             />
+//         </Stack.Navigator>
+//     )
+// }
 
 const CustomDrawerContent = (props) => (
     <DrawerContentScrollView {...props}>
@@ -231,6 +231,16 @@ const Main = () => {
                 <Drawer.Screen
                     name='Home'
                     component={HomeScreenNavigator}
+                    listeners={({ navigation }) => ({
+                        drawerItemPress: (e) => {
+                            e.preventDefault()
+                            navigation.navigate(
+                                'Home',
+                                { screen: 'Home' }
+                            )
+                        }
+                    }
+                    )}
                     options={{
                         title: 'Pokemon',
                         headerShown: false,
@@ -313,7 +323,7 @@ const Main = () => {
                         )
                     }}
                 />
-            {/* <Drawer.Screen
+                {/* <Drawer.Screen
                     name='PokemonMovesScreen'
                     component={PokemonMovesScreenNavigator}
                     options={{

@@ -1,4 +1,4 @@
-import { Button, View, Text, TouchableOpacity, Image } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { getPokemon, getPokemonByName } from '../API/calls'
 import { useState, useEffect } from 'react'
 import { FlatList } from 'react-native'
