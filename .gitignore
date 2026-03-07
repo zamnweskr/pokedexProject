@@ -54,3 +54,7 @@ buck-out/
 .expo/
 web-build/
 dist/
+
+# Native directories (managed by EAS)
+ios/
+android/
