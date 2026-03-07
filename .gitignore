@@ -64,3 +64,4 @@ android/
 
 # Firebase local cache
 .firebase/
+.expo/
