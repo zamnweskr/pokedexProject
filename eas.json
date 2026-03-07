@@ -13,8 +13,7 @@
       "distribution": "internal"
     },
     "production": {
-      "autoIncrement": true,
-      "prebuildCommand": "mkdir -p .expo/web && npx expo prebuild --non-interactive"
+      "autoIncrement": true
     }
   },
   "submit": {
