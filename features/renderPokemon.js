@@ -85,16 +85,16 @@ const RenderPokemon = (props) => {
                             'PokemonMoves',
                             {pokemon: pokemon}
                         )}
-                        style={{ backgroundColor: typeColors[typeName], padding: 12 }}
+                        style={{ backgroundColor: typeColors[typeName], padding: 12, borderRadius: 8 }}
                     >
                         <Text style={styles.viewMovesButton}>View Moves</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={() => navigation.navigate(
-                            'Evolutions',
-                            {pokemon: pokemon}
-                        )}
-                        style={{ backgroundColor: typeColors[typeName], padding: 12, marginTop: 10 }}
+                        // onPress={() => navigation.navigate(
+                        //     'Evolutions',
+                        //     {pokemon: pokemon}
+                        // )}
+                        style={{ backgroundColor: typeColors[typeName], padding: 12, marginTop: 10, borderRadius: 8 }}
                     >
                         <Text style={styles.viewMovesButton}>View Evos</Text>
                     </TouchableOpacity>
@@ -227,7 +227,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         marginVertical: 10,
         borderRadius: 8,
-        overflow: 'hidden'
     },
     viewMovesButton: {
         color: '#FFF',

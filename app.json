@@ -1,10 +1,28 @@
 {
   "expo": {
-    "name": "pokedex",
+    "name": "Native Dex",
     "slug": "pokedex",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "web": {
+      "bundler": "metro"
+    },
+    "ios": {
+      "bundleIdentifier": "com.weskr.pokedex",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "com.weskr.pokedex"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "dbb9508f-bf4d-416a-bf54-5c3b16dc93fb"
+      }
+    },
+    "icon": "./icon.png"
   }
 }

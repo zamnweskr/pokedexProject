@@ -5,7 +5,7 @@ import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from "
 import { Icon } from 'react-native-elements'
 import capitalize from '../utils/capitalize'
 import typeColors from '../shared/typeColors'
-import pokeball from '../shared/img/Poké_Ball_icon.svg.png'
+import pokeball from '../shared/img/pokeball.png'
 import abilityIcon from '../shared/img/abilityIcon.png'
 import movesIcon from '../shared/img/movesIcon.png'
 import gyrados from '../shared/img/gyrados.png'
@@ -179,29 +179,6 @@ const GameVersionScreenNavigator = () => {
     )
 }
 
-// const PokemonMovesScreenNavigator = () => {
-//     const Stack = createStackNavigator()
-//     return (
-//         <Stack.Navigator screenOptions={screenOptions}>
-//             <Stack.Screen
-//                 name='PokemonMovesDetailScreen'
-//                 component={PokemonMovesDetailScreen}
-//                 options={({ navigation }) => ({
-//                     title: 'PokemonMovesDetailScreen',
-//                     headerLeft: () => (
-//                         <TouchableOpacity
-//                             onPress={() => navigation.toggleDrawer()}
-//                             style={{ marginLeft: 10 }}
-//                         >
-//                             <Image source={pokeball} style={{ width: 30, height: 30 }} />
-//                         </TouchableOpacity>
-//                     )
-//                 })}
-//             />
-//         </Stack.Navigator>
-//     )
-// }
-
 const CustomDrawerContent = (props) => (
     <DrawerContentScrollView {...props}>
         <View style={styles.drawerHeader}>
@@ -261,14 +238,6 @@ const Main = () => {
                             </TouchableOpacity>
                         )
                     })}
-                // options={{
-                //     title: 'Pokemon',
-                //     headerShown: false,
-                //     drawerIcon: () =>
-                //         <TouchableOpacity>
-                //             <Image source={pikachu} style={{ width: 40, height: 40 }} />
-                //         </TouchableOpacity>
-                // }}
                 />
                 <Drawer.Screen
                     name='Moves'
@@ -314,10 +283,10 @@ const Main = () => {
                         headerShown: false,
                         drawerIcon: () => (
                             <TouchableOpacity
-                                onPress={() => navigation.navigate(
-                                    'Evolutions',
-                                    {screen: 'Evolutions' }
-                                )}
+                                // onPress={() => navigation.navigate(
+                                //     'Evolutions',
+                                //     {screen: 'Evolutions' }
+                                // )}
                             >
                                 <Image source={gyrados} style={{ width: 40, height: 40 }} />
                             </TouchableOpacity>
@@ -332,33 +301,16 @@ const Main = () => {
                         headerShown: false,
                         drawerIcon: () => (
                             <TouchableOpacity
-                                onPress={() => navigation.navigate(
-                                    'Game Version',
-                                    {screen: 'Game Version' }
-                                )}
+                                // onPress={() => navigation.navigate(
+                                //     'Game Version',
+                                //     {screen: 'Game Version' }
+                                // )}
                             >
                                 <Image source={GByellow} style={{ width: 40, height: 40 }} />
                             </TouchableOpacity>
                         )
                     })}
                 />
-                {/* <Drawer.Screen
-                    name='PokemonMovesScreen'
-                    component={PokemonMovesScreenNavigator}
-                    options={{
-                        title: '',
-                        headerShown: false,
-                        drawerIcon: ({ color }) => (
-                            <Icon
-                                name='star'
-                                type='font-awesome'
-                                size={24}
-                                iconStyle={{ width: 24 }}
-                                color={color}
-                            />
-                        )
-                    }}
-                />  */}
             </Drawer.Navigator>
         </View>
     )
