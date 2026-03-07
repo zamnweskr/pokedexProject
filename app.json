@@ -3,6 +3,7 @@
     "name": "Native Dex",
     "slug": "pokedex",
     "version": "1.0.0",
+    "icon": "./icon.png",
     "assetBundlePatterns": [
       "**/*"
     ],
