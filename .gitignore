@@ -57,3 +57,10 @@ dist/
 # Native directories (managed by EAS)
 ios/
 android/
+
+# Expo local files (keep .expo/web/ tracked for EAS build)
+.expo/devices.json
+.expo/README.md
+
+# Firebase local cache
+.firebase/
