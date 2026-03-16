@@ -1,11 +1,44 @@
-import { View, Text } from 'react-native'
+import { View, Text, Button } from 'react-native'
 
-const GameVersionScreen = () => {
+const GameVersionScreen = ({ navigation }) => {
     return(
         <View>
-            <Text>
-                This is the Game Version Screen where you will see the versions of the game the pokemon appear in.
-            </Text>
+            <Button
+                title='Gen 1'
+                onPress={() => navigation.navigate('Home', { screen: 'Home', params: { generation: 1 } })}
+            />
+            <Button
+                title='Gen 2'
+                onPress={() => navigation.navigate('Home', { screen: 'Home', params: { generation: 2 } })}
+            />
+            <Button
+                title='Gen 3'
+                onPress={() => navigation.navigate('Home', { screen: 'Home', params: { generation: 3 } })}
+            />
+            <Button
+                title='Gen 4'
+                onPress={() => navigation.navigate('Home', { screen: 'Home', params: { generation: 4 } })}
+            />
+            <Button
+                title='Gen 5'
+                onPress={() => navigation.navigate('Home', { screen: 'Home', params: { generation: 5 } })}
+            />
+            <Button
+                title='Gen 6'
+                onPress={() => navigation.navigate('Home', { screen: 'Home', params: { generation: 6 } })}
+            />
+            <Button
+                title='Gen 7'
+                onPress={() => navigation.navigate('Home', { screen: 'Home', params: { generation: 7 } })}
+            />
+            <Button
+                title='Gen 8'
+                onPress={() => navigation.navigate('Home', { screen: 'Home', params: { generation: 8 } })}
+            />
+            <Button
+                title='Gen 9'
+                onPress={() => navigation.navigate('Home', { screen: 'Home', params: { generation: 9 } })}
+            />
         </View>
     )
 }

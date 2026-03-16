@@ -301,10 +301,10 @@ const Main = () => {
                         headerShown: false,
                         drawerIcon: () => (
                             <TouchableOpacity
-                                // onPress={() => navigation.navigate(
-                                //     'Game Version',
-                                //     {screen: 'Game Version' }
-                                // )}
+                                onPress={() => navigation.navigate(
+                                    'Game Version',
+                                    {screen: 'Game Version' }
+                                )}
                             >
                                 <Image source={GByellow} style={{ width: 40, height: 40 }} />
                             </TouchableOpacity>

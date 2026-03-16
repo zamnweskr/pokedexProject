@@ -124,31 +124,6 @@ const RenderPokemon = (props) => {
                             </View>
                         ))}
                     </View>
-                    {/* <FlatList
-                    data={pokemon.stats}
-                    keyExtractor={pokemon => pokemon.stat.name}
-                    scrollEnabled={false}
-                    renderItem={({ item: pokemon }) => (
-                        <Slider
-                            value={pokemon.base_stat}
-                            maximumValue={300}
-                            minimumValue={0}
-                            step={1}
-                            animateTransitions
-                            disabled
-                            trackStyle={{ height: 5, backgroundColor: 'transparent' }}
-                        />
-                    )}
-                /> */}
-                    {/* <Text style={styles.statStyle}>
-                    HP: {pokemon.stats[0].base_stat}
-                    {console.log(pokemon.stats)}
-                    Attack: {pokemon.stats[1].base_stat}
-                    Defense: {pokemon.stats[2].base_stat}
-                    Special Attack: {pokemon.stats[3].base_stat}
-                    Special Defense: {pokemon.stats[4].base_stat}
-                    Speed: {pokemon.stats[5].base_stat}
-                </Text> */}
                 </View>
             </ScrollView>
         </View>

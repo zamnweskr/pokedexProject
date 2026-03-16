@@ -1,33 +1,39 @@
 import { View, Text, TouchableOpacity } from 'react-native'
-import { getPokemon, getPokemonByName } from '../API/calls'
+import { getPokemon, getPokemonByName, getPokemonByGeneration } from '../API/calls'
 import { useState, useEffect } from 'react'
 import { FlatList } from 'react-native'
 import { Card } from 'react-native-elements'
 import capitalize from '../utils/capitalize'
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation, route }) => {
     const [pokemon, setPokemon] = useState([])
 
     const fetchPokemon = async () => {
-        const allPokemon = await getPokemon()
+        const allPokemon = await getPokemonByGeneration(route.params?.generation ?? 1)
         return allPokemon
     }
 
     const getEachPokemon = async () => {
         const retrievedPokemon = await fetchPokemon()
         const results = await Promise.all(
-            retrievedPokemon.results.map(async (currentPokemon) => {
-                let response = await getPokemonByName(currentPokemon.name)
-                return { ...currentPokemon, ...response.data }
+            retrievedPokemon.map(async (currentPokemon) => {
+                console.log(currentPokemon.name)
+                try {
+                    let response = await getPokemonByName(currentPokemon.name)
+                    return { ...currentPokemon, ...response.data }
+                } catch (e) {
+                    return null
+                }
+
             })
         )
-        setPokemon(results)
+        setPokemon(results.filter(problemPoke => problemPoke !== null).sort((a, b) => a.id - b.id))
     }
 
     useEffect(() => {
         setPokemon([])
         getEachPokemon()
-    }, [])
+    }, [route.params?.generation])
 
     return (
         <View style={{ flex: 1 }}>
