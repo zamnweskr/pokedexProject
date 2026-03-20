@@ -9,191 +9,204 @@ import capitalize from '../utils/capitalize';
 
 const MovesScreen = () => {
 
-  const [moves, setMoves] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [showModal, setShowModal] = useState(false);
-  const [selectedMove, setSelectedMove] = useState(null);
-  const [moveDetails, setMoveDetails] = useState(null);
-  const [loadingDetails, setLoadingDetails] = useState(false);
+    const [moves, setMoves] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedMove, setSelectedMove] = useState(null);
+    const [moveDetails, setMoveDetails] = useState(null);
+    const [loadingDetails, setLoadingDetails] = useState(false);
+    const [offset, setOffset] = useState(0)
+    const [hasMore, setHasMore] = useState(true)
 
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const result = await getPokemonMoves();
-        setMoves(result);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-      }
+    useEffect(() => {
+        const loadData = async () => {
+            try {
+                const response = await getPokemonMoves();
+                setMoves(response.results);
+                setHasMore(response.results.length < response.count)
+                setLoading(false);
+            } catch (error) {
+                setLoading(false);
+            }
+        };
+        loadData();
+    }, []);
+
+    const loadMore = async () => {
+        if (!hasMore) return
+        const newOffset = offset + 50
+        const response = await getPokemonMoves(50, newOffset)
+        setMoves(move => [...move, ...response.results])
+        setOffset(newOffset)
+        setHasMore(moves.length + response.results.length < response.count)
+    }
+
+    if (loading) {
+        return (
+            <View style={styles.centered}>
+                <ActivityIndicator size="large" color="#0000ff" />
+                <Text>Loading Pokemon Moves...</Text>
+            </View>
+
+        );
+    }
+
+    const handleMovePress = async (move) => {
+        setSelectedMove(move);
+        setShowModal(true);
+        setLoadingDetails(true);
+        setMoveDetails(null);
+
+        try {
+            const details = await getPokemonMoveDetails(move.url);
+            // console.log('Move details:', details); 
+            setMoveDetails(details);
+        } catch (error) {
+            console.error('Error loading move details:', error);
+        } finally {
+            setLoadingDetails(false);
+        }
     };
 
-    loadData();
-  }, []);
 
-  if (loading) {
+
+    const renderItem = ({ item }) => {
+        return (
+            <TouchableOpacity
+                style={styles.item}
+                onPress={() => handleMovePress(item)}
+            >
+                <Text style={styles.abilityName}>{item.name}</Text>
+            </TouchableOpacity>
+        );
+    };
+
     return (
-      <View style={styles.centered}>
-        <ActivityIndicator size="large" color="#0000ff" />
-        <Text>Loading Pokemon Moves...</Text>
-      </View>
-
-    );
-  }
-
-  const handleMovePress = async (move) => {
-    setSelectedMove(move);
-    setShowModal(true);
-    setLoadingDetails(true);
-    setMoveDetails(null);
-
-    try {
-      const details = await getPokemonMoveDetails(move.url);
-      // console.log('Move details:', details); 
-      setMoveDetails(details);
-    } catch (error) {
-      console.error('Error loading move details:', error);
-    } finally {
-      setLoadingDetails(false);
-    }
-  };
-
-
-
-  const renderItem = ({ item }) => {
-    return (
-      <TouchableOpacity
-        style={styles.item}
-        onPress={() => handleMovePress(item)}
-      >
-        <Text style={styles.abilityName}>{item.name}</Text>
-      </TouchableOpacity>
-    );
-  };
-
-  return (
-    <View style={{ flex: 1 }}>
-      <FlatList
-        data={moves}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
-        contentContainerStyle={styles.list}
-      />
-
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={showModal}
-        onRequestClose={() => setShowModal(false)}
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>
-              {selectedMove?.name}
-            </Text>
-
-            {loadingDetails ? (
-              <ActivityIndicator size="small" color="#0000ff" />
-            ) : moveDetails ? (
-              <>
-                <Text style={styles.modalText}>
-                  <Text style={styles.label}>Type: </Text>
-                  {capitalize(moveDetails.type?.name)}
-                </Text>
-                <Text style={styles.modalText}>
-                  <Text style={styles.label}>Power: </Text>
-                  {moveDetails.power || 'N/A'}
-                </Text>
-                <Text style={styles.modalText}>
-                  <Text style={styles.label}>Accuracy: </Text>
-                  {moveDetails.accuracy || 'N/A'}
-                </Text>
-                <Text style={styles.modalText}>
-                  <Text style={styles.label}>PP: </Text>
-                  {moveDetails.pp}
-                </Text>
-                <Text style={styles.modalText}>
-                  <Text style={styles.label}>Damage Class: </Text>
-                  {capitalize(moveDetails.damage_class?.name)}
-                </Text>
-                <Text style={styles.modalText}>
-                  <Text style={styles.label}>Generation: </Text>
-                  {capitalize(moveDetails.generation?.name)}
-                </Text>
-                <Text style={styles.modalDescription}>
-                  <Text style={styles.label}>Description: </Text>
-                  {moveDetails.flavor_text_entries?.find(
-                    entry => entry.language.name === 'en'
-                  )?.flavor_text || 'No description available'}
-                </Text>
-              </>
-            ) : null}
-
-            <Button
-              title="Close"
-              onPress={() => setShowModal(false)}
+        <View style={{ flex: 1 }}>
+            <FlatList
+                data={moves}
+                renderItem={renderItem}
+                keyExtractor={(item, index) => index.toString()}
+                contentContainerStyle={styles.list}
+                onEndReached={loadMore}
+                onEndReachedThreshold={0.5}
             />
-          </View>
+
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={showModal}
+                onRequestClose={() => setShowModal(false)}
+            >
+                <View style={styles.modalOverlay}>
+                    <View style={styles.modalContent}>
+                        <Text style={styles.modalTitle}>
+                            {selectedMove?.name}
+                        </Text>
+
+                        {loadingDetails ? (
+                            <ActivityIndicator size="small" color="#0000ff" />
+                        ) : moveDetails ? (
+                            <>
+                                <Text style={styles.modalText}>
+                                    <Text style={styles.label}>Type: </Text>
+                                    {capitalize(moveDetails.type?.name)}
+                                </Text>
+                                <Text style={styles.modalText}>
+                                    <Text style={styles.label}>Power: </Text>
+                                    {moveDetails.power || 'N/A'}
+                                </Text>
+                                <Text style={styles.modalText}>
+                                    <Text style={styles.label}>Accuracy: </Text>
+                                    {moveDetails.accuracy || 'N/A'}
+                                </Text>
+                                <Text style={styles.modalText}>
+                                    <Text style={styles.label}>PP: </Text>
+                                    {moveDetails.pp}
+                                </Text>
+                                <Text style={styles.modalText}>
+                                    <Text style={styles.label}>Damage Class: </Text>
+                                    {capitalize(moveDetails.damage_class?.name)}
+                                </Text>
+                                <Text style={styles.modalText}>
+                                    <Text style={styles.label}>Generation: </Text>
+                                    {capitalize(moveDetails.generation?.name)}
+                                </Text>
+                                <Text style={styles.modalDescription}>
+                                    <Text style={styles.label}>Description: </Text>
+                                    {moveDetails.flavor_text_entries?.find(
+                                        entry => entry.language.name === 'en'
+                                    )?.flavor_text || 'No description available'}
+                                </Text>
+                            </>
+                        ) : null}
+
+                        <Button
+                            title="Close"
+                            onPress={() => setShowModal(false)}
+                        />
+                    </View>
+                </View>
+            </Modal>
         </View>
-      </Modal>
-    </View>
-  );
+    );
 };
 
 const styles = StyleSheet.create({
-  centered: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  list: {
-    padding: 10
-  },
-  item: {
-    padding: 20,
-    backgroundColor: '#fff',
-    borderBottomWidth: 1,
-    borderColor: '#ddd',
-    marginBottom: 5,
-    borderRadius: 8
-  }, abilityName: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    textTransform: 'capitalize'
-  },
-  modalOverlay: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)'
-  },
-  modalContent: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
-    width: '80%',
-    alignItems: 'center'
-  },
-  modalTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    textTransform: 'capitalize'
-  },
-  modalText: {
-    fontSize: 14,
-    marginBottom: 20,
-    textAlign: 'center'
-  },
-  modalDescription: {
-    fontSize: 14,
-    marginTop: 10,
-    marginBottom: 10,
-    fontStyle: 'italic',
-    color: '#555'
-  },
-  label: {
-    fontWeight: 'bold'
-  }
+    centered: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    list: {
+        padding: 10
+    },
+    item: {
+        padding: 20,
+        backgroundColor: '#fff',
+        borderBottomWidth: 1,
+        borderColor: '#ddd',
+        marginBottom: 5,
+        borderRadius: 8
+    }, abilityName: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        textTransform: 'capitalize'
+    },
+    modalOverlay: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)'
+    },
+    modalContent: {
+        backgroundColor: 'white',
+        padding: 20,
+        borderRadius: 10,
+        width: '80%',
+        alignItems: 'center'
+    },
+    modalTitle: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 10,
+        textTransform: 'capitalize'
+    },
+    modalText: {
+        fontSize: 14,
+        marginBottom: 20,
+        textAlign: 'center'
+    },
+    modalDescription: {
+        fontSize: 14,
+        marginTop: 10,
+        marginBottom: 10,
+        fontStyle: 'italic',
+        color: '#555'
+    },
+    label: {
+        fontWeight: 'bold'
+    }
 
 });
 

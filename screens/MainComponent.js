@@ -10,7 +10,6 @@ import abilityIcon from '../shared/img/abilityIcon.png'
 import movesIcon from '../shared/img/movesIcon.png'
 import gyrados from '../shared/img/gyrados.png'
 import pikachu from '../shared/img/pika.png'
-import GByellow from '../shared/img/version.png'
 import HomeScreen from "./HomeScreen"
 import PokemonScreen from "./PokemonScreen"
 import MovesScreen from "./MovesScreen"
@@ -32,6 +31,21 @@ const HomeScreenNavigator = () => {
     const Stack = createStackNavigator()
     return (
         <Stack.Navigator screenOptions={screenOptions}>
+            <Stack.Screen
+                name='Game Version'
+                component={GameVersionScreen}
+                options={({ navigation }) => ({
+                    title: 'Generation',
+                    headerLeft: () => (
+                        <TouchableOpacity
+                            onPress={() => navigation.toggleDrawer()}
+                            style={{ marginLeft: 10 }}
+                        >
+                            <Image source={pokeball} style={{ width: 30, height: 30 }} />
+                        </TouchableOpacity>
+                    )
+                })}
+            />
             <Stack.Screen
                 name='Home'
                 component={HomeScreen}
@@ -156,29 +170,6 @@ const EvolutionsScreenNavigator = () => {
     )
 }
 
-const GameVersionScreenNavigator = () => {
-    const Stack = createStackNavigator()
-    return (
-        <Stack.Navigator screenOptions={screenOptions}>
-            <Stack.Screen
-                name='Game Version'
-                component={GameVersionScreen}
-                options={({ navigation }) => ({
-                    title: 'Game Version',
-                    headerLeft: () => (
-                        <TouchableOpacity
-                            onPress={() => navigation.toggleDrawer()}
-                            style={{ marginLeft: 10 }}
-                        >
-                            <Image source={pokeball} style={{ width: 30, height: 30 }} />
-                        </TouchableOpacity>
-                    )
-                })}
-            />
-        </Stack.Navigator>
-    )
-}
-
 const CustomDrawerContent = (props) => (
     <DrawerContentScrollView {...props}>
         <View style={styles.drawerHeader}>
@@ -219,19 +210,19 @@ const Main = () => {
                             e.preventDefault()
                             navigation.navigate(
                                 'Home',
-                                { screen: 'Home' }
+                                { screen: 'Game Version' }
                             )
                         }
                     }
                     )}
                     options={({ navigation }) => ({
-                        title: 'Pokemon',
+                        title: 'Generation',
                         headerShown: false,
                         drawerIcon: () => (
                             <TouchableOpacity
                                 onPress={() => navigation.navigate(
                                     'Home',
-                                    {screen: 'Home' }
+                                    {screen: 'Game Version' }
                                 )}
                             >
                                 <Image source={pikachu} style={{ width: 40, height: 40 }} />
@@ -289,24 +280,6 @@ const Main = () => {
                                 // )}
                             >
                                 <Image source={gyrados} style={{ width: 40, height: 40 }} />
-                            </TouchableOpacity>
-                        )
-                    })}
-                />
-                <Drawer.Screen
-                    name='Game Version'
-                    component={GameVersionScreenNavigator}
-                    options={({ navigation }) => ({
-                        title: 'Game Version',
-                        headerShown: false,
-                        drawerIcon: () => (
-                            <TouchableOpacity
-                                onPress={() => navigation.navigate(
-                                    'Game Version',
-                                    {screen: 'Game Version' }
-                                )}
-                            >
-                                <Image source={GByellow} style={{ width: 40, height: 40 }} />
                             </TouchableOpacity>
                         )
                     })}

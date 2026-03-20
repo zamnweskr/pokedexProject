@@ -24,9 +24,18 @@ export const getPokemonByName = async (name) => {
         return response
     } catch (e) {
         console.log('FAILED: ', name, e)
-        // alert(`We can't find that pokemon! Check your spelling and check your network connection, then try again!`)
+        alert(`We can't find that pokemon! Check your spelling and check your network connection, then try again!`)
     }
 
+}
+
+export const getPokemonSpecies = async (name) => {
+    try {
+        let response = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${name}`)
+        return response.data.varieties[0].pokemon.name
+    } catch (e) {
+        console.log('FAILED: ', name, e)
+    }
 }
 
 export const getPokemonDescription = async (id) => {
@@ -39,10 +48,10 @@ export const getPokemonDescription = async (id) => {
     }
 }
 
-export const getPokemonMoves = async (move) => {
+export const getPokemonMoves = async (limit = 50, offset = 0) => {
     try {
-        const response = await axios.get(`https://pokeapi.co/api/v2/move?limit=150`)
-        return response.data.results
+        const response = await axios.get(`https://pokeapi.co/api/v2/move?limit=${limit}&offset=${offset}`)
+        return response.data
     } catch (e) {
         console.log(e)
         alert(`Sorry no moves found.`)

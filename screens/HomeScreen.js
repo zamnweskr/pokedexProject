@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity } from 'react-native'
-import { getPokemon, getPokemonByName, getPokemonByGeneration } from '../API/calls'
+import { getPokemon, getPokemonByName, getPokemonByGeneration, getPokemonSpecies } from '../API/calls'
 import { useState, useEffect } from 'react'
 import { FlatList } from 'react-native'
 import { Card } from 'react-native-elements'
@@ -19,8 +19,9 @@ const HomeScreen = ({ navigation, route }) => {
             retrievedPokemon.map(async (currentPokemon) => {
                 console.log(currentPokemon.name)
                 try {
-                    let response = await getPokemonByName(currentPokemon.name)
-                    return { ...currentPokemon, ...response.data }
+                    let defaultFormName = await getPokemonSpecies(currentPokemon.name)
+                    let response = await getPokemonByName(defaultFormName)
+                    return { ...currentPokemon, ...response.data, name: currentPokemon.name }
                 } catch (e) {
                     return null
                 }
