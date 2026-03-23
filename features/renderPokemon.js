@@ -8,7 +8,7 @@ import Slider from '@react-native-community/slider'
 
 
 const RenderPokemon = (props) => {
-    const { pokemon, description } = props
+    const { pokemon, description, evoChainId } = props
     const navigation = useNavigation();
 
     if (!pokemon) return null
@@ -69,17 +69,6 @@ const RenderPokemon = (props) => {
 
 
                 <View style={styles.buttonContainer}>
-                    {/* <Button
-                    title="View Moves"
-                    color={typeColors[typeName]}
-                    onPress={() => { 
-                        console.log("Navigating with:", pokemon.name);
-                        navigation.navigate(
-                            'PokemonMoves',
-                            { pokemon: pokemon }
-                        )}
-                }
-                /> */}
                     <TouchableOpacity
                         onPress={() => navigation.navigate(
                             'PokemonMoves',
@@ -90,10 +79,10 @@ const RenderPokemon = (props) => {
                         <Text style={styles.viewMovesButton}>View Moves</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        // onPress={() => navigation.navigate(
-                        //     'Evolutions',
-                        //     {pokemon: pokemon}
-                        // )}
+                        onPress={() => navigation.navigate(
+                            'Evolutions',
+                            {pokemon: pokemon, evoChainId: evoChainId}
+                        )}
                         style={{ backgroundColor: typeColors[typeName], padding: 12, marginTop: 10, borderRadius: 8 }}
                     >
                         <Text style={styles.viewMovesButton}>View Evos</Text>
@@ -116,7 +105,6 @@ const RenderPokemon = (props) => {
                                         animateTransitions
                                         minimumTrackTintColor={typeColors[typeName]}
                                         maximumTrackTintColor='#e0e0e0'
-                                        // thumbTintColor={typeColors[typeName]}
                                         thumbTintColor='transparent'
                                     />
                                 </View>

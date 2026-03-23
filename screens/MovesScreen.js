@@ -10,14 +10,14 @@ import capitalize from '../utils/capitalize';
 const MovesScreen = () => {
 
     const [moves, setMoves] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [showModal, setShowModal] = useState(false);
     const [selectedMove, setSelectedMove] = useState(null);
-    const [moveDetails, setMoveDetails] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [loadingDetails, setLoadingDetails] = useState(false);
+    const [moveDetails, setMoveDetails] = useState(null);
     const [offset, setOffset] = useState(0)
     const [hasMore, setHasMore] = useState(true)
-
+    const [showModal, setShowModal] = useState(false);
+    
     useEffect(() => {
         const loadData = async () => {
             try {

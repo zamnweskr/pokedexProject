@@ -76,8 +76,7 @@ const HomeScreenNavigator = () => {
                         }
                     })
                 })}
-
-            />
+            />            
             <Stack.Screen
                 name='PokemonMoves'
                 component={PokemonMovesDetailScreen}
@@ -93,9 +92,23 @@ const HomeScreenNavigator = () => {
                         }
                     })
                 })}
-
             />
-
+            <Stack.Screen
+                name='Evolutions'
+                component={EvolutionsScreen}
+                options={({ route }) => ({
+                    title: capitalize(route.params.pokemon.name),
+                    headerStyle: [
+                        styles.evoHeaderStyle,
+                        { backgroundColor: typeColors[route.params.pokemon.types[0].type.name] }
+                    ],
+                    cardStyleInterpolator: ({ current }) => ({
+                        cardStyle: {
+                            opacity: current.progress
+                        }
+                    })
+                })}
+            />
         </Stack.Navigator>
     )
 }
@@ -266,7 +279,7 @@ const Main = () => {
                         )
                     })}
                 />
-                <Drawer.Screen
+                {/* <Drawer.Screen
                     name='Evolutions'
                     component={EvolutionsScreenNavigator}
                     options={({ navigation }) => ({
@@ -283,7 +296,7 @@ const Main = () => {
                             </TouchableOpacity>
                         )
                     })}
-                />
+                /> */}
             </Drawer.Navigator>
         </View>
     )
@@ -305,13 +318,18 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     headerStyle: {
-        // backgroundColor: '#d3a6c8',
         shadowColor: 'transparent',
         elevation: 0,
         height: Platform.OS === 'ios' ? 80 : 80,
         borderBottomWidth: 0,
         borderTopRightRadius: 75,
         borderTopLeftRadius: 75
+    },
+        evoHeaderStyle: {
+        shadowColor: 'transparent',
+        elevation: 0,
+        height: Platform.OS === 'ios' ? 80 : 80,
+        borderBottomWidth: 0,
     },
     drawerImage: {
         margin: 10,

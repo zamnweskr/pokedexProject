@@ -1,14 +1,5 @@
 import axios from 'axios'
 
-export const getPokemon = async () => {
-    try {
-        let response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=151')
-        return response.data
-    } catch (e) {
-        console.log(e)
-    }
-}
-
 export const getPokemonByGeneration = async (id) => {
     try {
         let response = await axios.get(`https://pokeapi.co/api/v2/generation/${id}`)
@@ -38,7 +29,7 @@ export const getPokemonSpecies = async (name) => {
     }
 }
 
-export const getPokemonDescription = async (id) => {
+export const getPokemonSpeciesData = async (id) => {
     try {
         let response = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
         return response.data
@@ -98,5 +89,15 @@ export const getPokemonAbilityDetails = async (url) => {
         console.error(e);
         alert('Sorry, could not fetch ability details.');
 
+    }
+}
+
+export const getEvoChain = async (id) => {
+    try {
+        const response = await axios.get(`https://pokeapi.co/api/v2/evolution-chain/${id}/`)
+        return response.data
+    } catch (e) {
+        console.error(e)
+        alert('Sorry, could not find evolution chain')
     }
 }
