@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { useState, useEffect } from 'react'
-import { getEvoChain, getPokemonByName } from '../API/calls';
+import { getEvoChain, getPokemonByName, getPokemonSpecies } from '../API/calls';
 import { Card } from 'react-native-elements'
 import capitalize from '../utils/capitalize'
 import typeColors from '../shared/typeColors'
@@ -21,7 +21,8 @@ const EvolutionsScreen = ({ route }) => {
             const evoStages = [first, second, third].filter(Boolean)
             const stagesWithData = await Promise.all(
                 evoStages.map(async (stage) => {
-                    const pokemon = await getPokemonByName(stage.species.name)
+                    const defaultFormName = await getPokemonSpecies(stage.species.name)
+                    const pokemon = await getPokemonByName(defaultFormName)
                     return { ...stage, pokemonData: pokemon.data }
                 })
             )

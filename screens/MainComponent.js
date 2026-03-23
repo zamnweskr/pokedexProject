@@ -279,24 +279,6 @@ const Main = () => {
                         )
                     })}
                 />
-                {/* <Drawer.Screen
-                    name='Evolutions'
-                    component={EvolutionsScreenNavigator}
-                    options={({ navigation }) => ({
-                        title: 'Evolutions',
-                        headerShown: false,
-                        drawerIcon: () => (
-                            <TouchableOpacity
-                                // onPress={() => navigation.navigate(
-                                //     'Evolutions',
-                                //     {screen: 'Evolutions' }
-                                // )}
-                            >
-                                <Image source={gyrados} style={{ width: 40, height: 40 }} />
-                            </TouchableOpacity>
-                        )
-                    })}
-                /> */}
             </Drawer.Navigator>
         </View>
     )
