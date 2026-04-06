@@ -2,13 +2,11 @@ import { Platform, StyleSheet, View, Image, Text, TouchableOpacity } from "react
 import Constants from 'expo-constants'
 import { createStackNavigator } from "@react-navigation/stack"
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer"
-import { Icon } from 'react-native-elements'
 import capitalize from '../utils/capitalize'
 import typeColors from '../shared/typeColors'
 import pokeball from '../shared/img/pokeball.png'
 import abilityIcon from '../shared/img/abilityIcon.png'
 import movesIcon from '../shared/img/movesIcon.png'
-import gyrados from '../shared/img/gyrados.png'
 import pikachu from '../shared/img/pika.png'
 import HomeScreen from "./HomeScreen"
 import PokemonScreen from "./PokemonScreen"
